@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour 
 {
 	public GameObject[] hazards;
+	public GameObject [] powerUps;
 	public Vector3 spawnValues;
 	public int hazardCount;
 	public float spawnWait;
@@ -63,6 +64,8 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+
+
 	public void AddScore (int newScoreValue)
 	{
 		score += newScoreValue;
@@ -79,5 +82,20 @@ public class GameController : MonoBehaviour
 		gameOverText.text = "Game Over";
 		gameOver = true;
 	}
+
+	public void SpawnPowerUp(Vector3 spawnPosition)
+	{
+		int powerUpChance = Random.Range(1,100);
+		GameObject powerUp = powerUps[Random.Range(0,powerUps.Length)];
+		if(powerUpChance <=5){
+			Instantiate (powerUp, spawnPosition, Quaternion.identity);
+		}
+	}
+	//Functions to add
+	//spawnPowerUps
+	//changeLevel
+	//pause
+	//menu
+	//
 	
 }
