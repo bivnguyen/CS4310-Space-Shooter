@@ -5,14 +5,15 @@ using UnityEngine;
 public class FollowManuver : MonoBehaviour {
 
 	private Rigidbody rb;
-	public Transform target;
-	public float chaseSpeed;
+	public Transform target;		//Player ship
+	public float chaseSpeed;		//Movement speed
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 	}
 
 	void Update () {
+		//while player is alive look at player, rotate enemy unit to face, and move towards player
 		if (target) {
 			rb.transform.LookAt (target.position);
 			transform.Rotate (new Vector3 (0, 180, 0), Space.Self);
