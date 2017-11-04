@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
-	public GameObject[] hazards;
 	public GameObject [] powerUps;
+	public GameObject level;
 	public Vector3 spawnValues;
 	public int hazardCount;
 	public float spawnWait;
@@ -16,20 +16,28 @@ public class GameController : MonoBehaviour
 	public Text scoreText;
 	public Text restartText;
 	public Text gameOverText;
+	public Text levelText;
 
 	private int score;
+	private int currentLevel;
 	private bool restart;
 	private bool gameOver;
+	private bool bonus;
+	private bool readyForNextLevel;
 
 	void Start()
 	{	
 		restart = false;
 		gameOver = false;
+		bonus = false;
 		restartText.text = "";
 		gameOverText.text = "";
+		currentLevel = 0;
+		readyForNextLevel = true;
 		score = 0;
+		bonus = false;
 		UpdateScore ();
-		StartCoroutine (SpawnWaves());
+
 	}
 
 	void Update()
@@ -41,30 +49,41 @@ public class GameController : MonoBehaviour
 				Application.LoadLevel (Application.loadedLevel);
 			}
 		}
-	}
+			//if(bonus){
+			//	//spawnBonusLevel();
+			//}
+			//else{
+				levelText.text = "Level " + currentLevel;
+				if(readyForNextLevel){
+					toggleReadyForLevel();
+					currentLevel+=1;
+					spawnLevel();
+					//do{}while(!readyForNextLevel);
 
-	IEnumerator SpawnWaves()
-	{	
-		while(true){
-			yield return new WaitForSeconds (startWait);
-			for(int i = 0;i < hazardCount; i++)
-			{
-				GameObject hazard = hazards[Random.Range(0,hazards.Length)];
-				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x,spawnValues.x), spawnValues.y, spawnValues.z);
-				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (hazard, spawnPosition, spawnRotation);
-				yield return new WaitForSeconds (spawnWait);
-			}
-			yield return new WaitForSeconds (waveWait);
+				}
+			//}
 			if (gameOver){
 				restartText.text = "Press 'R' for Restart";
 				restart = true;
-				break;
 			}
-		}
 	}
 
+	public void toggleReadyForLevel(){
+		if(readyForNextLevel){
+		readyForNextLevel = false;
+		}
+		else{
+			readyForNextLevel = true;
+		}
 
+	}
+	public bool GetGameOver(){
+		return gameOver;
+	}
+
+	public int GetCurrentLevel(){
+		return currentLevel;
+	}
 
 	public void AddScore (int newScoreValue)
 	{
@@ -91,8 +110,12 @@ public class GameController : MonoBehaviour
 			Instantiate (powerUp, spawnPosition, Quaternion.identity);
 		}
 	}
+
+	void spawnLevel (){
+		Instantiate(level, transform.position, Quaternion.identity);
+
+	}
 	//Functions to add
-	//spawnPowerUps
 	//changeLevel
 	//pause
 	//menu
