@@ -14,6 +14,7 @@ public class DiveManuver : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		//Enemy ship will dive to players coordinates when enemy is spawned
+		target = GameObject.FindWithTag("Player").transform;
 		diveTarget = target.position;
 		//Enemy ship will return to the opposite side of the game board it spawned on after diving
 		diveDestination = new Vector3 (-rb.transform.position.x, rb.transform.position.y, rb.transform.position.z);
