@@ -14,7 +14,7 @@ public class FollowManuver : MonoBehaviour {
 		target = GameObject.FindWithTag("Player").transform;
 	}
 
-	void Update () {
+	void FixedUpdate () {
 		//while player is alive look at player, rotate enemy unit to face, and move towards player
 		if (target) {
 			rb.transform.LookAt (target.position);

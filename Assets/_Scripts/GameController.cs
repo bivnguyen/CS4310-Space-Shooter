@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 	public GameObject level;
 	public Vector3 spawnValues;
 	public int hazardCount;
+	public int waveCount;
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
 	private bool restart;
 	private bool gameOver;
 	private bool bonus;
+	private bool pause;
 	private bool readyForNextLevel;
 
 	void Start()
@@ -36,19 +38,27 @@ public class GameController : MonoBehaviour
 		readyForNextLevel = true;
 		score = 0;
 		bonus = false;
+		pause = false;
 		UpdateScore ();
 
 	}
 
 	void Update()
 	{
+		if(pause){
+			Time.timeScale = 0;
+		}else{
+			Time.timeScale = 1;
+		}
 		if (restart)
 		{
 			if (Input.GetKeyDown (KeyCode.R))
 			{
 				Application.LoadLevel (Application.loadedLevel);
 			}
+
 		}
+		//if(!gameOver){
 			//if(bonus){
 			//	//spawnBonusLevel();
 			//}
@@ -57,15 +67,20 @@ public class GameController : MonoBehaviour
 				if(readyForNextLevel){
 					toggleReadyForLevel();
 					currentLevel+=1;
+
 					spawnLevel();
 					//do{}while(!readyForNextLevel);
 
 				}
 			//}
-			if (gameOver){
-				restartText.text = "Press 'R' for Restart";
-				restart = true;
+			if(Input.GetKeyDown (KeyCode.Escape)){
+				pause = !pause;
 			}
+		//}
+		if (gameOver){
+			restartText.text = "Press 'R' for Restart";
+			restart = true;
+		}
 	}
 
 	public void toggleReadyForLevel(){
@@ -113,10 +128,8 @@ public class GameController : MonoBehaviour
 
 	void spawnLevel (){
 		Instantiate(level, transform.position, Quaternion.identity);
-
 	}
 	//Functions to add
-	//changeLevel
 	//pause
 	//menu
 	//

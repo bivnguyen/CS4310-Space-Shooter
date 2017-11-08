@@ -22,7 +22,7 @@ public class DiveManuver : MonoBehaviour {
 
 	}
 
-	void Update () {
+	void FixedUpdate () {
 		//Check to sdee if dive has reached the diving target and flag to return to top of game board
 		if (rb.transform.position == diveTarget) {
 			isDiving = false;
