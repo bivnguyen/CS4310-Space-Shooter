@@ -7,7 +7,6 @@ TagManager:
   - Enemy
   - Boundary
   - Boss
-  - DiveBoundary
   layers:
   - Default
   - TransparentFX
