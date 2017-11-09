@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiveManuver : MonoBehaviour {
+public class DiveManeuver : MonoBehaviour {
 
 	private Rigidbody rb;
 	public Transform target;			//Player ship
