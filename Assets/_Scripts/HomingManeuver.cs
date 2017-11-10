@@ -14,7 +14,7 @@ public class HomingManeuver : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		//while player is alive look at player, rotate enemy unit to face, and move towards player
+		//While player is alive, home towards the player with magnetic like force
 		if (target) {
 			Vector3 relativePos = target.position - rb.transform.position;
 			rb.AddForce(relativePos*(pullSpeedFactor/(relativePos.magnitude*relativePos.magnitude)));

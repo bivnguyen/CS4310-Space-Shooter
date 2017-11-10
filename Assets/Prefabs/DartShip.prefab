@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 82142262798902550}
   - component: {fileID: 114625124419704512}
   m_Layer: 0
-  m_Name: DiveShip
+  m_Name: DartShip
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4049c3bbcc2d6478dabc2e31f573a020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  rb: {fileID: 0}
+  diveTarget: {x: 0, y: 0, z: 0}
+  rotated: 0
 --- !u!114 &114838873096470576
 MonoBehaviour:
   m_ObjectHideFlags: 1
