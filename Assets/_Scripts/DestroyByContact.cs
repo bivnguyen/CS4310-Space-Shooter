@@ -21,7 +21,7 @@ public class DestroyByContact : MonoBehaviour
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.tag == "Boundary" || other.tag == "Enemy")
+		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Boss")
 		{
 			return;
 		}
@@ -33,9 +33,15 @@ public class DestroyByContact : MonoBehaviour
 			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver();
 		}
+		if(tag == "Enemy"){
+			gameController.SpawnPowerUp(transform.position);
+		}
 
 		gameController.AddScore(scoreValue);
+		//if(other.tag != "Player")     //god mode for testing
 		Destroy(other.gameObject);
-		Destroy(gameObject);
+		if(tag != "Boss"){
+			Destroy(gameObject);
+		}
 	}
 }
