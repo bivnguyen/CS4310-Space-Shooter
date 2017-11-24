@@ -11,6 +11,7 @@ public class LevelController : MonoBehaviour
     private int maxEnemies;
     private int enemyCounter;
     public GameObject[] hazards;
+    public GameObject[] bosses;
     //	public Vector3 spawnValues;
     //	public int hazardCount;
     //	public int waveCount;
@@ -29,8 +30,14 @@ public class LevelController : MonoBehaviour
             maxEnemies = gameController.GetMaxEnemies();
             enemiesSpawned = 0;
             gameController.SetEnemyCounter(0);
-            StartCoroutine(SpawnWaves());
-            //SpawnWaves();
+            if (currentLevel % 1 == 0)
+            {
+                SpawnBoss();
+            }
+            else
+            {
+                StartCoroutine(SpawnWaves());
+            }
         }
         if (gameController == null)
         {
@@ -47,6 +54,17 @@ public class LevelController : MonoBehaviour
             gameController.toggleReadyForLevel();
             Destroy(gameObject);
         }
+    }
+
+    void SpawnBoss()
+    {
+        maxEnemies = 1;
+        GameObject boss = bosses[Random.Range(0, bosses.Length)];
+        Vector3 spawnPosition = new Vector3(Random.Range(-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z);
+        Quaternion spawnRotation = Quaternion.identity;
+        Instantiate(boss, spawnPosition, spawnRotation);
+        gameController.IncrementEnemyCounter();
+        enemiesSpawned = 1;
     }
 
     IEnumerator SpawnWaves()
