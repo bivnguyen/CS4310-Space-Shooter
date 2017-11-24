@@ -60,7 +60,7 @@ public class LevelController : MonoBehaviour
     {
         maxEnemies = 1;
         GameObject boss = bosses[Random.Range(0, bosses.Length)];
-        Vector3 spawnPosition = new Vector3(Random.Range(-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z);
+        Vector3 spawnPosition = new Vector3(Random.Range(-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z-2);
         Quaternion spawnRotation = Quaternion.identity;
         Instantiate(boss, spawnPosition, spawnRotation);
         gameController.IncrementEnemyCounter();
