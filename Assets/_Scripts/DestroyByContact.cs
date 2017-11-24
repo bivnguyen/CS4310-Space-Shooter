@@ -21,7 +21,7 @@ public class DestroyByContact : MonoBehaviour
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Boss")
+		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Boss" || other.tag == "Enemy Weapon")
 		{
 			return;
 		}
@@ -35,13 +35,15 @@ public class DestroyByContact : MonoBehaviour
 		}
 		if(tag == "Enemy"){
 			gameController.SpawnPowerUp(transform.position);
-		}
-
+            gameController.DecrementEnemyCounter();
+        }
+       
 		gameController.AddScore(scoreValue);
-		//if(other.tag != "Player")     //god mode for testing
-		Destroy(other.gameObject);
+		if(other.tag != "God")     //god mode is for testing
+			Destroy(other.gameObject);
 		if(tag != "Boss"){
-			Destroy(gameObject);
+            Destroy(gameObject);
+
 		}
 	}
 }
