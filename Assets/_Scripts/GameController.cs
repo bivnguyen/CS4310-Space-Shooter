@@ -19,6 +19,9 @@ public class GameController : MonoBehaviour
 	public Text gameOverText;
 	public Text levelText;
 	public Text highScoreText;
+	public InputField inputBox;
+	public Button submitButton;
+	public HighScoreController scoreController;
 
 	private int score;
 	private int currentLevel;
@@ -27,7 +30,7 @@ public class GameController : MonoBehaviour
 	private bool bonus;
 	private bool pause;
 	private bool readyForNextLevel;
-	private HighScoreController scores;
+
 
 	void Start()
 	{	
@@ -43,8 +46,8 @@ public class GameController : MonoBehaviour
 		bonus = false;
 		pause = false;
 		UpdateScore ();
-		scores = new HighScoreController ();
-		//scores.SaveScore();
+		inputBox.gameObject.SetActive (false);
+		submitButton.gameObject.SetActive (false);
 	}
 
 	void Update()
@@ -124,8 +127,12 @@ public class GameController : MonoBehaviour
 
 	public void HighScores()
 	{
-		scores.LoadScore ();
-		highScoreText.text = scores.index + " " + scores.name + " " + scores.score;
+		scoreController.LoadScores ();
+		if (scoreController.isHighScore (score)) {
+			scoreController.SaveScores ();
+		} else {
+			scoreController.PrintScores ();
+		}
 	}
 
 	public void SpawnPowerUp(Vector3 spawnPosition)
