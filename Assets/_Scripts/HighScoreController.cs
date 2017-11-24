@@ -48,12 +48,12 @@ public class HighScoreController : MonoBehaviour
 
 		//for testing purposes only
 
-		Scores temp1 = new Scores ();
-
-		temp1.score = 100;
-		temp1.name = "JTL";
-
-		highScores.Add (temp1);
+//		Scores temp1 = new Scores ();
+//
+//		temp1.score = 100;
+//		temp1.name = "JTL";
+//
+//		highScores.Add (temp1);
 
 	}
 
@@ -71,6 +71,10 @@ public class HighScoreController : MonoBehaviour
 	{
 		bool isHighScore = false;
 
+		if (highScores.Count = 0) {
+			isHighScore = true;
+			place = 1;
+		}
 		for (int i = 0; i < highScores.Count; i++) {
 			if (playerScore >= highScores [i].score) {
 				isHighScore = true;
