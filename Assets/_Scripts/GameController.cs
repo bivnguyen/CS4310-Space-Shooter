@@ -19,9 +19,9 @@ public class GameController : MonoBehaviour
 	public Text gameOverText;
 	public Text levelText;
 	public Text highScoreText;
-	public InputField inputBox;
-	public Button submitButton;
-	public HighScoreController scoreController;
+	public InputField inputBox; // Store the inputbox gui element for player initials
+	public Button submitButton; // Store the button gui element for player score
+	public HighScoreController scoreController; // Store the high Score controller game element
 
 	private int score;
 	private int currentLevel;
@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour
 		UpdateScore ();
 		inputBox.gameObject.SetActive (false);
 		submitButton.gameObject.SetActive (false);
+		//PlayerPrefs.DeleteAll ();  //Used to clear high scores
 	}
 
 	void Update()
@@ -122,14 +123,16 @@ public class GameController : MonoBehaviour
 	{
 		gameOverText.text = "Game Over";
 		gameOver = true;
+		//Begins the high score keeping functions
 		HighScores ();
 	}
 
+	//Tests for high scores and manages displaying input and high score screen
 	public void HighScores()
 	{
 		scoreController.LoadScores ();
 		if (scoreController.isHighScore (score)) {
-			scoreController.SaveScores ();
+			scoreController.DisplayScoreInput ();
 		} else {
 			scoreController.PrintScores ();
 		}

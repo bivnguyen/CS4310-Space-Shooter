@@ -5,34 +5,54 @@ using UnityEngine.UI;
 
 public class HighScoreController : MonoBehaviour
 {
-	private List<Scores> highScores;
+	private List<Scores> highScores;  //High score list
 	private int place;  //What place on the leader board did the player score
 	private int newScore; //New high score to be recorded
+	private string newName; //New player name to be recorded
 
 	public int listLength;  // Set number of scores saved, default to 10
-	public InputField inputBox;
-	public Button submitButton;
-	public Text highScoreText;
+	public InputField inputBox; //Player name input gui box
+	public Button submitButton;	//Name submit button
+	public Text highScoreText;	//Text box to display high scores
 
+	//Button controller function to be attached to submit button canvas member
 	public void submitButtonController ()
 	{
-		name = inputBox.text;
-		PlayerPrefs.SetInt ("Score"+place,newScore);
-		PlayerPrefs.SetString ("Name"+place,name);
-		PlayerPrefs.Save();
-		submitButton.gameObject.SetActive (false);
+		newName = inputBox.text; // Set new name to contents of input box
+		submitButton.gameObject.SetActive (false); //Remove input box and submit button
 		inputBox.gameObject.SetActive (false);
-
+		SaveScores ();
 		LoadScores ();
 		PrintScores ();
 	}
 
-	public void SaveScores ()
+	//Display input GUI elements
+	public void DisplayScoreInput ()
 	{
 		submitButton.gameObject.SetActive (true);
 		inputBox.gameObject.SetActive (true);
 	}
 
+	//Insert new high score into place and save score list
+	public void SaveScores ()
+	{
+		Scores temp = new Scores ();
+		temp.score = newScore;
+		temp.name = newName;
+
+		highScores.Insert ((place-1), temp);
+
+		for (int i = 0; i < highScores.Count; i++) {
+			Debug.Log ("Save temp name = " + temp.name + " save temp score = " + temp.score);
+			PlayerPrefs.SetInt ("Score"+(i+1),highScores[i].score);
+			PlayerPrefs.SetString ("Name"+(i+1),highScores[i].name);
+		}
+		PlayerPrefs.Save();
+
+
+	}
+
+	//Load saved scores into list
 	public void LoadScores ()
 	{	
 		highScores = new List<Scores> ();
@@ -46,17 +66,9 @@ public class HighScoreController : MonoBehaviour
 			i++;
 		}
 
-		//for testing purposes only
-
-//		Scores temp1 = new Scores ();
-//
-//		temp1.score = 100;
-//		temp1.name = "JTL";
-//
-//		highScores.Add (temp1);
-
 	}
 
+	//Display high scores into text box GUI element
 	public void PrintScores ()
 	{
 		string scoreList = "";
@@ -67,20 +79,23 @@ public class HighScoreController : MonoBehaviour
 		highScoreText.text = scoreList;
 	}
 
+	//test if player's score is a high score and save the place on the list if so
 	public bool isHighScore (int playerScore)
 	{
 		bool isHighScore = false;
 
-		if (highScores.Count = 0) {
-			isHighScore = true;
-			place = 1;
-		}
-		for (int i = 0; i < highScores.Count; i++) {
+		for (int i = 0; i < highScores.Count && !isHighScore; i++) {
 			if (playerScore >= highScores [i].score) {
 				isHighScore = true;
 				place = i+1;
 				newScore = playerScore;
 			}
+		}
+
+		if ((highScores.Count < listLength) && isHighScore == false) {
+			place = highScores.Count + 1;
+			newScore = playerScore;
+			isHighScore = true;
 		}
 
 		return isHighScore;
@@ -89,7 +104,7 @@ public class HighScoreController : MonoBehaviour
 }
 
 
-
+//Score element of list
 public class Scores
 {
 	public int score;
