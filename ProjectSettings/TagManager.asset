@@ -8,6 +8,7 @@ TagManager:
   - Boundary
   - Boss
   - MultiShot
+  - FireRate
   layers:
   - Default
   - TransparentFX

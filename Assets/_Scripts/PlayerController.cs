@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 	private AudioSource audioSource;
 
 	// the stuff below is for multi shot power up
-	public bool multiShot;
+	private bool multiShot;
 	public Transform shotSpawn1; 
 	public Transform shotSpawn2; 
 	public Transform shotSpawn3; 
@@ -76,6 +76,11 @@ public class PlayerController : MonoBehaviour
 		if (other.tag == "MultiShot")
 		{
 			multiShot = true;
+		}
+
+		if (other.tag == "FireRate")
+		{
+			fireRate = 0.1f;
 		}
 	}
 
