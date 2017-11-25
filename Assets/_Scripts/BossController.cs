@@ -16,7 +16,7 @@ public class BossController : MonoBehaviour {
 		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
 		if(gameControllerObject != null){
 			gameController = gameControllerObject.GetComponent<GameController>();
-			hitPoints = gameController.GetCurrentLevel();
+			hitPoints = (int)Mathf.Log(gameController.GetCurrentLevel()) + 15;
 		}
 		if (gameController == null)
 		{

@@ -12,12 +12,6 @@ public class LevelController : MonoBehaviour
     private int enemyCounter;
     public GameObject[] hazards;
     public GameObject[] bosses;
-    //	public Vector3 spawnValues;
-    //	public int hazardCount;
-    //	public int waveCount;
-    //	public float spawnWait;
-    //	public float startWait;
-    //	public float waveWait;
 
     void Start()
     {
@@ -25,12 +19,11 @@ public class LevelController : MonoBehaviour
         if (gameControllerObject != null)
         {
             gameController = gameControllerObject.GetComponent<GameController>();
-            //gameController.toggleReadyForLevel();
             currentLevel = gameController.GetCurrentLevel();
             maxEnemies = gameController.GetMaxEnemies();
             enemiesSpawned = 0;
             gameController.SetEnemyCounter(0);
-            if (currentLevel % 1 == 0)
+            if (currentLevel % 5 == 0)
             {
                 SpawnBoss();
             }
@@ -43,7 +36,6 @@ public class LevelController : MonoBehaviour
         {
             Debug.Log("cannot find 'GameController' script");
         }
-
     }
 
 
@@ -71,7 +63,6 @@ public class LevelController : MonoBehaviour
     {
         for (enemiesSpawned = 0; enemiesSpawned < maxEnemies;)
         {
-            //System.Threading.Thread.Sleep((int)startWait*1000);
             yield return new WaitForSeconds(gameController.startWait);
             for (int i = 0; i < gameController.hazardCount; i++, enemiesSpawned++)
             {
@@ -84,12 +75,9 @@ public class LevelController : MonoBehaviour
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(hazard, spawnPosition, spawnRotation);
                 gameController.IncrementEnemyCounter();
-                //System.Threading.Thread.Sleep((int)spawnWait*1000);
                 yield return new WaitForSeconds(gameController.spawnWait);
             }
             yield return new WaitForSeconds(gameController.waveWait);
-            //System.Threading.Thread.Sleep((int)waveWait*1000);
-
         }
     }
 }
