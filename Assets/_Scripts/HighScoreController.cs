@@ -85,14 +85,14 @@ public class HighScoreController : MonoBehaviour
 		bool isHighScore = false;
 
 		for (int i = 0; i < highScores.Count && !isHighScore; i++) {
-			if (playerScore >= highScores [i].score) {
+			if (playerScore > highScores [i].score) {
 				isHighScore = true;
 				place = i+1;
 				newScore = playerScore;
 			}
 		}
 
-		if ((highScores.Count < listLength) && isHighScore == false) {
+		if ((highScores.Count < listLength) && isHighScore == false && playerScore > 0) {
 			place = highScores.Count + 1;
 			newScore = playerScore;
 			isHighScore = true;
