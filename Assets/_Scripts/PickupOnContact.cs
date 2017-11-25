@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickupOnContact : MonoBehaviour {
 
 	private GameController gameController;
+	private PlayerController gunObject;
 
 	void Start()
 	{
@@ -21,6 +22,7 @@ public class PickupOnContact : MonoBehaviour {
 			Debug.Log ("Cannot find 'GameController' script");
 		}
 
+
 	}
 		
 	void OnTriggerEnter(Collider other)
@@ -30,11 +32,11 @@ public class PickupOnContact : MonoBehaviour {
 		{
 			return;
 		}
-
-		// some code here to makes it so that you have the power up
-		// i have no idea if this code even works though
-
+			
 		Destroy (gameObject);
+
+		//the code below does not seem to work
+		//gunObject.gunSwitch();
 
 	}
 
