@@ -24,8 +24,9 @@ public class PlayerController : MonoBehaviour
 	public Transform shotSpawn1; 
 	public Transform shotSpawn2; 
 	public Transform shotSpawn3; 
+	private int multiShotAmmo;
 
-	//gunSwitch doesn't seem to work
+	//gunSwitch doesn't seem to work when I use it from PickupOnContact.cs
 	public void gunSwitch()
 	{
 		multiShot = true;
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour
 
 	void Start ()
 	{
-		//multiShot = false;
+		multiShot = false;
+		multiShotAmmo = 0;
 		rb = GetComponent<Rigidbody>();
 		audioSource = GetComponent<AudioSource>();
 	}
@@ -42,9 +44,11 @@ public class PlayerController : MonoBehaviour
 	{
 		if(Input.GetButton ("Fire1") && Time.time > nextFire){
 
-			if (multiShot)
+			if (multiShotAmmo > 0)
 			{
 				FireShots ();
+				multiShotAmmo--;
+				//StartCoroutine ("PowerupTimer", 0); // will last 10 seconds. see poweruptimer code below
 			}
 
 			nextFire = Time.time + fireRate;
@@ -73,26 +77,47 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
+		
 		if (other.tag == "MultiShot")
 		{
-			multiShot = true;
+			// turns on multishot power up
+			//multiShot = true;
+
+			//having a fixed ammo might be better than being timed
+			multiShotAmmo += 20;
+			Destroy (other.gameObject);
 		}
 
-		if (other.tag == "FireRate")
+
+		else if (other.tag == "FireRate")
 		{
-			fireRate = 0.1f;
+			// wait time for firing guns multiplied by multiple of .7f seconds.
+			fireRate *= 0.7f;
+			Destroy (other.gameObject);
 		}
+
 	}
-
-
+		
 
 	void FireShots()
 	{
+		// the second and third bullet for the multiShot power up
 		GameObject Bullet2 = (GameObject)Instantiate (shot, shotSpawn2.position, shotSpawn2.rotation);
 		Bullet2.transform.position = shotSpawn2.transform.position;
 
 		GameObject Bullet3 = (GameObject)Instantiate (shot, shotSpawn3.position, shotSpawn3.rotation);
 		Bullet3.transform.position = shotSpawn3.transform.position;
 	}
+
+
+	IEnumerator PowerupTimer()
+	{
+		// whatever power up this was used for will last 10f seconds
+		// at the moment, obtaining multiple power ups with these will cause problems
+		yield return new WaitForSeconds(10f);
+		multiShot = false;
+	}
+
+
 
 }
