@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 	private float nextFire = 0.0f;
 	private AudioSource audioSource;
 
+	private GameController gameController;
+
 	// the stuff below is for multi shot power up
 	private bool multiShot;
 	public Transform shotSpawn1; 
@@ -42,6 +44,8 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+
+
 		if(Input.GetButton ("Fire1") && Time.time > nextFire){
 
 			if (multiShotAmmo > 0)
@@ -83,18 +87,27 @@ public class PlayerController : MonoBehaviour
 			// turns on multishot power up
 			//multiShot = true;
 
-			//having a fixed ammo might be better than being timed
+			//having a fixed ammo amount might be better than being timed
+			//easily stackable
 			multiShotAmmo += 20;
 			Destroy (other.gameObject);
 		}
-
 
 		else if (other.tag == "FireRate")
 		{
 			// wait time for firing guns multiplied by multiple of .7f seconds.
 			fireRate *= 0.7f;
 			Destroy (other.gameObject);
+			StartCoroutine ("PowerupTimer", 0);
+
 		}
+		/* // the following does not exist at the moment
+		else if (other.tag == "SpeedBoost")
+		{
+			
+			Destroy (other.gameObject);
+		}
+		*/
 
 	}
 		
@@ -112,10 +125,11 @@ public class PlayerController : MonoBehaviour
 
 	IEnumerator PowerupTimer()
 	{
-		// whatever power up this was used for will last 10f seconds
+		// whatever power up this was used for will last 15f seconds
 		// at the moment, obtaining multiple power ups with these will cause problems
-		yield return new WaitForSeconds(10f);
-		multiShot = false;
+		yield return new WaitForSeconds(15f);
+		//multiShot = false;
+		fireRate /= 0.7f;
 	}
 
 

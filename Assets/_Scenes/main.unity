@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUps:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1955916379044122, guid: 82cb2c2248112864ab6079d226bac594, type: 2}
+  - {fileID: 1922276259554630, guid: a6461fc99c3a4f9438a53094f0b53ada, type: 2}
   level: {fileID: 1438580585111824, guid: 6dc78b0139e7e45f4ae26969cf813c56, type: 2}
   spawnValues: {x: 6, y: 0, z: 17.4}
   hazardCount: 10
