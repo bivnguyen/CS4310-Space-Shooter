@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1101624030207598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
@@ -124,11 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6defe061ba30f4135aa713b05ef6f725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWait: {x: 0, y: 0}
-  maneuverTime: {x: 0, y: 0}
-  maneuverWait: {x: 0, y: 0}
-  dodge: 0
-  smoothing: 0
+  startWait: {x: 0.5, y: 2}
+  maneuverTime: {x: 0.5, y: 2}
+  maneuverWait: {x: 0.5, y: 2}
+  dodge: 5
+  smoothing: 7.5
   tilt: 0
   boundary:
     xMin: 0
