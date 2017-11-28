@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 	public Transform shotSpawn3; 
 	private int multiShotAmmo;
 
+	private DestroyByContact shield = new DestroyByContact();
+
 	//gunSwitch doesn't seem to work when I use it from PickupOnContact.cs
 	public void gunSwitch()
 	{
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
 	void Start ()
 	{
+		
 		multiShot = false;
 		multiShotAmmo = 0;
 		rb = GetComponent<Rigidbody>();
@@ -43,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-
+		shield.shieldSwitch ();
 		if(Input.GetButton ("Fire1") && Time.time > nextFire){
 
 			if (multiShotAmmo > 0)
@@ -52,7 +55,6 @@ public class PlayerController : MonoBehaviour
 				multiShotAmmo--;
 				//StartCoroutine ("MultiShotTimer", 0); // use this if you want multiShot to be timed instead of having ammo count
 			}
-
 			nextFire = Time.time + fireRate;
 			Instantiate (shot, shotSpawn1.position, shotSpawn1.rotation);// as GameObject;
 			audioSource.Play();
@@ -80,26 +82,23 @@ public class PlayerController : MonoBehaviour
 	void OnTriggerEnter (Collider other)
 	{
 		//the power ups
-		if (other.tag == "MultiShot")
-		{
+		if (other.tag == "MultiShot") {
 			//multiShot = true; // if you want multi shot to use timer
 			multiShotAmmo += 20;
 			Destroy (other.gameObject);
-		}
-
-		else if (other.tag == "FireRate")
-		{
+		} else if (other.tag == "FireRate") {
 			fireRate *= 0.75f;
 			Destroy (other.gameObject);
 			StartCoroutine ("FireRateTimer", 0);
-		}
-
-		else if (other.tag == "SpeedBoost")
-		{
+		} else if (other.tag == "SpeedBoost") {
 			speed *= 1.25f;
 			Destroy (other.gameObject);
 			StartCoroutine ("SpeedBoostTimer", 0);
+		} else if (other.tag == "Shield") {
+			shield.shieldSwitch ();
+			Destroy (other.gameObject);
 		}
+
 			
 	}
 

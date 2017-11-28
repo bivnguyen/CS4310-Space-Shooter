@@ -10,6 +10,7 @@ TagManager:
   - MultiShot
   - FireRate
   - SpeedBoost
+  - Shield
   layers:
   - Default
   - TransparentFX
