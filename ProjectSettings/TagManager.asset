@@ -9,6 +9,7 @@ TagManager:
   - Boss
   - MultiShot
   - FireRate
+  - SpeedBoost
   layers:
   - Default
   - TransparentFX

@@ -1,9 +1,5 @@
 ﻿/*
-
-
 PROBABLY NOT GONNA USE THIS FILE
-
-
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -14,10 +10,8 @@ public class PickupOnContact : MonoBehaviour {
 	private GameController gameController;
 	private PlayerController gunObject = new PlayerController();
 
-
 	void Start()
 	{
-		
 		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
 
 		if (gameControllerObject != null)
@@ -29,9 +23,7 @@ public class PickupOnContact : MonoBehaviour {
 		{
 			Debug.Log ("Cannot find 'GameController' script");
 		}
-
 	}
-		
 		 
 	//the only thing below that works is the Destroy (gameobject);
 
@@ -47,9 +39,7 @@ public class PickupOnContact : MonoBehaviour {
 		if (other.tag == "Player" && tag == "MultiShot")
 		{
 			//gunObject.gunSwitch ();
-
 			Destroy (gameObject);
-
 		}
 
 		else if (other.tag == "Player" && tag == "FireRate")
@@ -57,9 +47,5 @@ public class PickupOnContact : MonoBehaviour {
 			Destroy (gameObject);
 			//gunObject.gunSwitch ();
 		}
-			
-
 	}
-
-
 }

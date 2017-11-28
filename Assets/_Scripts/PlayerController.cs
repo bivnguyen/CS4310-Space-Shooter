@@ -18,10 +18,9 @@ public class PlayerController : MonoBehaviour
 	public float fireRate = 0.5f;
 	private float nextFire = 0.0f;
 	private AudioSource audioSource;
-
 	private GameController gameController;
 
-	// the stuff below is for multi shot power up
+	// the code below is for the multi shot power up
 	private bool multiShot;
 	public Transform shotSpawn1; 
 	public Transform shotSpawn2; 
@@ -45,14 +44,13 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{
 
-
 		if(Input.GetButton ("Fire1") && Time.time > nextFire){
 
 			if (multiShotAmmo > 0)
 			{
 				FireShots ();
 				multiShotAmmo--;
-				//StartCoroutine ("PowerupTimer", 0); // will last 10 seconds. see poweruptimer code below
+				//StartCoroutine ("MultiShotTimer", 0); // use this if you want multiShot to be timed instead of having ammo count
 			}
 
 			nextFire = Time.time + fireRate;
@@ -81,57 +79,60 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
-		
+		//the power ups
 		if (other.tag == "MultiShot")
 		{
-			// turns on multishot power up
-			//multiShot = true;
-
-			//having a fixed ammo amount might be better than being timed
-			//easily stackable
+			//multiShot = true; // if you want multi shot to use timer
 			multiShotAmmo += 20;
 			Destroy (other.gameObject);
 		}
 
 		else if (other.tag == "FireRate")
 		{
-			// wait time for firing guns multiplied by multiple of .7f seconds.
-			fireRate *= 0.7f;
+			fireRate *= 0.75f;
 			Destroy (other.gameObject);
-			StartCoroutine ("PowerupTimer", 0);
-
+			StartCoroutine ("FireRateTimer", 0);
 		}
-		/* // the following does not exist at the moment
+
 		else if (other.tag == "SpeedBoost")
 		{
-			
+			speed *= 1.25f;
 			Destroy (other.gameObject);
+			StartCoroutine ("SpeedBoostTimer", 0);
 		}
-		*/
-
+			
 	}
-		
 
 	void FireShots()
 	{
-		// the second and third bullet for the multiShot power up
+		// the second bullet for the multiShot power up
 		GameObject Bullet2 = (GameObject)Instantiate (shot, shotSpawn2.position, shotSpawn2.rotation);
 		Bullet2.transform.position = shotSpawn2.transform.position;
 
+		// the third bullet for the multiShot power up
 		GameObject Bullet3 = (GameObject)Instantiate (shot, shotSpawn3.position, shotSpawn3.rotation);
 		Bullet3.transform.position = shotSpawn3.transform.position;
 	}
 
-
-	IEnumerator PowerupTimer()
+	//after fire rate power up is obtained, this code will undo the boost after 10 seconds
+	IEnumerator FireRateTimer()
 	{
-		// whatever power up this was used for will last 15f seconds
-		// at the moment, obtaining multiple power ups with these will cause problems
-		yield return new WaitForSeconds(15f);
-		//multiShot = false;
-		fireRate /= 0.7f;
+		yield return new WaitForSeconds(10f);
+		fireRate /= 0.75f;
 	}
 
+	//after speed boost power up is obtained, this code will undo the boost after 10 seconds
+	IEnumerator SpeedBoostTimer()
+	{
+		yield return new WaitForSeconds(10f);
+		speed /= 1.25f;
+	}
 
+	//this code will not allow multi shot power up to be stacked
+	IEnumerator MultiShotTimer()
+	{
+		yield return new WaitForSeconds(10f);
+		multiShot = false;
+	}
 
 }
