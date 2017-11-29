@@ -64,6 +64,8 @@ public class GameController : MonoBehaviour
 		{
 			if (Input.GetKeyDown (KeyCode.R))
 			{
+				pause = false;
+				Pause ();
 				Application.LoadLevel (Application.loadedLevel);
 			}
 		}
@@ -92,7 +94,7 @@ public class GameController : MonoBehaviour
             }
 		//}
 		if (gameOver){
-            //pause = true;
+            pause = true;
 			restartText.text = "Press 'R' for Restart";
 			restart = true;
 		}
@@ -136,8 +138,8 @@ public class GameController : MonoBehaviour
 	{
 		gameOverText.text = "Game Over";
 		gameOver = true;
-		//pause = true;
-		//Pause();
+		pause = true;
+		Pause();
 		highScores.LoadScores ();
 		if (highScores.isHighScore (score)) {
 			highScores.DisplayScoreInput ();
