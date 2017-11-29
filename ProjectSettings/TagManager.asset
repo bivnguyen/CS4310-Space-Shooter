@@ -7,8 +7,13 @@ TagManager:
   - Enemy
   - Boundary
   - Boss
+  - MultiShot
+  - FireRate
+  - SpeedBoost
+  - Shield
   - God
   - Enemy Weapon
+
   layers:
   - Default
   - TransparentFX
