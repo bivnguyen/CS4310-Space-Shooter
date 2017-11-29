@@ -52,6 +52,8 @@ public class GameController : MonoBehaviour
 		pause = false;
         god = false;
 		UpdateScore ();
+		nameInput.gameObject.SetActive (false);
+		submitButton.gameObject.SetActive (false);
 
 	}
 
