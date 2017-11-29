@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
 	public GameObject [] powerUps;
 	public GameObject level;
+	public GameObject HighScores;
 	public Vector3 spawnValues;
 	public int hazardCount;
 	public int waveCount;
