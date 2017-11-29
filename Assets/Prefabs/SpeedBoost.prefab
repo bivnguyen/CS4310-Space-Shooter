@@ -131,10 +131,10 @@ MonoBehaviour:
   smoothing: 7.5
   tilt: 0
   boundary:
-    xMin: 0
-    xMax: 0
-    zMin: 0
-    zMax: 0
+    xMin: -6
+    xMax: 6
+    zMin: -20
+    zMax: 20
 --- !u!136 &136183837851567886
 CapsuleCollider:
   m_ObjectHideFlags: 1

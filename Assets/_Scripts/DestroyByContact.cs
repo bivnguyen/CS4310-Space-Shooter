@@ -46,7 +46,7 @@ public class DestroyByContact : MonoBehaviour
        
 		gameController.AddScore(scoreValue);
 		//if(other.tag != "Player")     //god mode for testing
-		if (!isShieldOn || other.tag != "God")
+		if (!isShieldOn && other.tag != "God")
 		{
 			Destroy (other.gameObject);
 		}
