@@ -141,8 +141,9 @@ public class GameController : MonoBehaviour
 		highScores.LoadScores ();
 		if (highScores.isHighScore (score)) {
 			highScores.SaveScores ();
+		} else {
+			highScores.PrintScores ();
 		}
-		highScores.PrintScores ();
 	}
 
 	public void SpawnPowerUp(Vector3 spawnPosition)
