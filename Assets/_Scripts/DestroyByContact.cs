@@ -8,8 +8,12 @@ public class DestroyByContact : MonoBehaviour
 	public GameObject playerExplosion;
 	public int scoreValue;
 	private GameController gameController;
+	static private bool isShieldOn;
+
 
 	void Start (){
+		isShieldOn = false;
+
 		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
 		if(gameControllerObject != null){
 			gameController = gameControllerObject.GetComponent<GameController>();
@@ -21,7 +25,9 @@ public class DestroyByContact : MonoBehaviour
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Boss")
+		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Enemy Weapon" || other.tag == "Boss" || 
+		   other.tag == "MultiShot" || other.tag == "FireRate" || other.tag == "SpeedBoost" || other.tag == "Shield")
+
 		{
 			return;
 		}
@@ -29,19 +35,33 @@ public class DestroyByContact : MonoBehaviour
 		if(explosion != null){
 			Instantiate(explosion, transform.position, transform.rotation);
 		}
-		if(other.tag == "Player"){
+		if(other.tag == "Player" && !isShieldOn){
 			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver();
 		}
 		if(tag == "Enemy"){
 			gameController.SpawnPowerUp(transform.position);
-		}
-
+            gameController.DecrementEnemyCounter();
+        }
+       
 		gameController.AddScore(scoreValue);
 		//if(other.tag != "Player")     //god mode for testing
-		Destroy(other.gameObject);
+		if (!isShieldOn && other.tag != "God")
+		{
+			Destroy (other.gameObject);
+		}
+
 		if(tag != "Boss"){
-			Destroy(gameObject);
+            Destroy(gameObject);
+
 		}
 	}
+
+	public void shieldSwitch(bool x)
+	{
+		isShieldOn = x;
+	}
+
 }
+
+

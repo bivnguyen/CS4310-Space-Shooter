@@ -27,6 +27,7 @@ public class DestroyByHealth : MonoBehaviour {
 		if(bossController == null){
 			Debug.Log("Cannot find 'BossController' script");
 		}
+        scoreValue = gameController.GetMaxEnemies() * gameController.GetScoreValue();
 
 	}
 
@@ -38,6 +39,7 @@ public class DestroyByHealth : MonoBehaviour {
 				Instantiate(explosion, transform.position, transform.rotation);
 			}
 			gameController.AddScore(scoreValue);
+            gameController.DecrementEnemyCounter();
 			Destroy(gameObject);
 		}
 	}
