@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114717383373131650}
   - component: {fileID: 114793203331877836}
   - component: {fileID: 114095968657434148}
+  - component: {fileID: 114240302260941850}
   m_Layer: 0
   m_Name: TestBoss
   m_TagString: Boss
@@ -128,6 +129,28 @@ MonoBehaviour:
   explosion: {fileID: 0}
   playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
   scoreValue: 0
+--- !u!114 &114240302260941850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576249338280648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6defe061ba30f4135aa713b05ef6f725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWait: {x: 0.5, y: 1}
+  maneuverTime: {x: 1, y: 2}
+  maneuverWait: {x: 1, y: 2}
+  dodge: 5
+  smoothing: 7.5
+  tilt: 10
+  boundary:
+    xMin: -6
+    xMax: 6
+    zMin: -20
+    zMax: 20
 --- !u!114 &114717383373131650
 MonoBehaviour:
   m_ObjectHideFlags: 1

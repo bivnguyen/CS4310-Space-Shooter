@@ -11,6 +11,9 @@ TagManager:
   - FireRate
   - SpeedBoost
   - Shield
+  - God
+  - Enemy Weapon
+
   layers:
   - Default
   - TransparentFX

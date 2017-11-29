@@ -25,8 +25,9 @@ public class DestroyByContact : MonoBehaviour
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Boss" || 
-		   other.tag == "MultiShot" || other.tag == "FireRate" || other.tag == "SpeedBoost")
+		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Enemy Weapon" || other.tag == "Boss" || 
+		   other.tag == "MultiShot" || other.tag == "FireRate" || other.tag == "SpeedBoost" || other.tag == "Shield")
+
 		{
 			return;
 		}
@@ -40,16 +41,19 @@ public class DestroyByContact : MonoBehaviour
 		}
 		if(tag == "Enemy"){
 			gameController.SpawnPowerUp(transform.position);
-		}
-
+            gameController.DecrementEnemyCounter();
+        }
+       
 		gameController.AddScore(scoreValue);
 		//if(other.tag != "Player")     //god mode for testing
-		if (!isShieldOn)
+		if (!isShieldOn || other.tag != "God")
 		{
 			Destroy (other.gameObject);
 		}
+
 		if(tag != "Boss"){
-			Destroy(gameObject);
+            Destroy(gameObject);
+
 		}
 	}
 
