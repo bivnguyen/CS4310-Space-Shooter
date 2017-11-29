@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
 		bonus = false;
 		restartText.text = "";
 		gameOverText.text = "";
+		highScoreText.text = "";
 		currentLevel = 0;
 		readyForNextLevel = true;
 		score = 0;

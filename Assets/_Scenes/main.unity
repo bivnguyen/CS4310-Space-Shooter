@@ -184,6 +184,9 @@ MonoBehaviour:
   restartText: {fileID: 1029512218}
   gameOverText: {fileID: 2118398309}
   levelText: {fileID: 1540008575}
+  highScoreText: {fileID: 112129006}
+  nameInput: {fileID: 1302488126}
+  submitButton: {fileID: 844967349}
 --- !u!4 &95483941
 Transform:
   m_ObjectHideFlags: 0
