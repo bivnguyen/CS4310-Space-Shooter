@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &95483940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,7 +780,7 @@ MonoBehaviour:
     zMin: -2
     zMax: 7
   shot: {fileID: 1730088760323918, guid: af1a992bd174843039cb6b64b7c45813, type: 2}
-  shotSpawn: {fileID: 2103352273}
+  shotSpawn: {fileID: 0}
   fireRate: 0.2
 --- !u!82 &655457846
 AudioSource:
