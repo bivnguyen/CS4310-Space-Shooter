@@ -140,7 +140,7 @@ public class GameController : MonoBehaviour
 		Pause();
 		highScores.LoadScores ();
 		if (highScores.isHighScore (score)) {
-			highScores.SaveScores ();
+			highScores.DisplayScoreInput ();
 		} else {
 			highScores.PrintScores ();
 		}
