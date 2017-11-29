@@ -2,32 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowManuver : MonoBehaviour {
+public class HomingManeuver : MonoBehaviour {
 
 	private Rigidbody rb;
 	private Transform target;		//Player ship
-	public float chaseSpeed;		//Movement speed
 	private GameObject playerShip;
+	public float pullSpeedFactor;
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
+
 		playerShip = GameObject.FindWithTag ("Player");
 
 		if (playerShip == null) {
 			playerShip = GameObject.FindWithTag ("God");
 		}
-
 		target = playerShip.transform;
-
-
 	}
 
 	void FixedUpdate () {
-		//while player is alive look at player, rotate enemy unit to face, and move towards player
+		//While player is alive, home towards the player with magnetic like force
 		if (target) {
-			rb.transform.LookAt (target.position);
-			transform.Rotate (new Vector3 (0, 180, 0), Space.Self);
-			transform.position = Vector3.MoveTowards(transform.position, target.position, chaseSpeed);
+			Vector3 relativePos = target.position - rb.transform.position;
+			rb.AddForce(relativePos*(pullSpeedFactor/(relativePos.magnitude*relativePos.magnitude)));
 		}
 	}
 }
+

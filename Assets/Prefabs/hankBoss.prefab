@@ -26,8 +26,8 @@ GameObject:
   - component: {fileID: 114316525241019054}
   - component: {fileID: 114820200823632204}
   - component: {fileID: 82600827157953072}
-  - component: {fileID: 114249337136775278}
   - component: {fileID: 65981656164523142}
+  - component: {fileID: 114314443460721910}
   m_Layer: 0
   m_Name: hankBoss
   m_TagString: Boss
@@ -241,7 +241,7 @@ MonoBehaviour:
   shotSpawn: {fileID: 4540567657044264}
   fireRate: 1.5
   delay: 0.5
---- !u!114 &114249337136775278
+--- !u!114 &114314443460721910
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -249,20 +249,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1396187264129244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6defe061ba30f4135aa713b05ef6f725, type: 3}
+  m_Script: {fileID: 11500000, guid: 670b2d9fa0eb94123af7e4eb37f7d322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWait: {x: 0.5, y: 1}
-  maneuverTime: {x: 1, y: 2}
-  maneuverWait: {x: 1, y: 2}
-  dodge: 5
-  smoothing: 7.5
-  tilt: 10
-  boundary:
-    xMin: -6
-    xMax: 6
-    zMin: -20
-    zMax: 20
 --- !u!114 &114316525241019054
 MonoBehaviour:
   m_ObjectHideFlags: 1

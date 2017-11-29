@@ -136,16 +136,18 @@ public class GameController : MonoBehaviour
 
 	public void GameOver()
 	{
-		gameOverText.text = "Game Over";
+		string gameOverMessage = "Game Over";
 		gameOver = true;
 		pause = true;
 		Pause();
 		highScores.LoadScores ();
 		if (highScores.isHighScore (score)) {
+			gameOverMessage += "\nNew High Score!";
 			highScores.DisplayScoreInput ();
 		} else {
 			highScores.PrintScores ();
 		}
+		gameOverText.text = gameOverMessage;
 	}
 
 	public void SpawnPowerUp(Vector3 spawnPosition)
