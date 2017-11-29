@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114178969758049318}
   m_Layer: 0
   m_Name: prop_asteroid_01
-  m_TagString: Untagged
+  m_TagString: bonusPowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,17 +141,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6defe061ba30f4135aa713b05ef6f725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWait: {x: 0, y: 0}
-  maneuverTime: {x: 0, y: 0}
-  maneuverWait: {x: 0, y: 0}
-  dodge: 0
-  smoothing: 0
+  startWait: {x: 0.5, y: 2}
+  maneuverTime: {x: 0.5, y: 2}
+  maneuverWait: {x: 0.5, y: 2}
+  dodge: 5
+  smoothing: 7.5
   tilt: 0
   boundary:
-    xMin: 0
-    xMax: 0
-    zMin: 0
-    zMax: 0
+    xMin: -6
+    xMax: 6
+    zMin: -20
+    zMax: 20
 --- !u!114 &114925829785542292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0001f257bcd740ca936eeb7c80991db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: -1
 --- !u!136 &136475466673546986
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -171,7 +171,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1479566873959826}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.51450837
   m_Height: 1.74

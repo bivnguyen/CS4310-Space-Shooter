@@ -104,11 +104,14 @@ public class PlayerController : MonoBehaviour
 			speed *= 1.25f;
 			Destroy (other.gameObject);
 			StartCoroutine ("SpeedBoostTimer", 0);
-		} 
-		if (other.tag == "Shield") {
+		} else if (other.tag == "Shield") {
 			theSwitch = true;
 			Destroy (other.gameObject);
 			StartCoroutine ("ShieldTimer", 0);
+		}
+		if (other.tag == "bonusPowerUp") {
+			multiShotAmmo += 20;
+			Destroy (other.gameObject);
 		}
 			
 	}
