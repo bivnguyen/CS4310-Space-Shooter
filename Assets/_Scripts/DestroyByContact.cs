@@ -53,9 +53,9 @@ public class DestroyByContact : MonoBehaviour
 		}
 	}
 
-	public void shieldSwitch()
+	public void shieldSwitch(bool x)
 	{
-		isShieldOn = true;
+		isShieldOn = x;
 	}
 
 }

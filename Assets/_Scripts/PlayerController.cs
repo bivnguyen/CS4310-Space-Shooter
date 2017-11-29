@@ -27,7 +27,9 @@ public class PlayerController : MonoBehaviour
 	public Transform shotSpawn3; 
 	private int multiShotAmmo;
 
+
 	private DestroyByContact shield = new DestroyByContact();
+	private bool theSwitch;
 
 	//gunSwitch doesn't seem to work when I use it from PickupOnContact.cs
 	public void gunSwitch()
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
 	void Start ()
 	{
-		
+		theSwitch = false;
 		multiShot = false;
 		multiShotAmmo = 0;
 		rb = GetComponent<Rigidbody>();
@@ -46,7 +48,15 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		shield.shieldSwitch ();
+		if (theSwitch) {
+			shield.shieldSwitch (true);
+		} 
+		else
+		{
+			shield.shieldSwitch (false);
+		}
+
+
 		if(Input.GetButton ("Fire1") && Time.time > nextFire){
 
 			if (multiShotAmmo > 0)
@@ -94,11 +104,12 @@ public class PlayerController : MonoBehaviour
 			speed *= 1.25f;
 			Destroy (other.gameObject);
 			StartCoroutine ("SpeedBoostTimer", 0);
-		} else if (other.tag == "Shield") {
-			shield.shieldSwitch ();
+		} 
+		if (other.tag == "Shield") {
+			theSwitch = true;
 			Destroy (other.gameObject);
+			StartCoroutine ("ShieldTimer", 0);
 		}
-
 			
 	}
 
@@ -132,6 +143,11 @@ public class PlayerController : MonoBehaviour
 	{
 		yield return new WaitForSeconds(10f);
 		multiShot = false;
+	}
+	IEnumerator ShieldTimer()
+	{
+		yield return new WaitForSeconds (10f);
+		theSwitch = false;
 	}
 
 }
