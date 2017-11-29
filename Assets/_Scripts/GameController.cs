@@ -136,6 +136,8 @@ public class GameController : MonoBehaviour
 	{
 		gameOverText.text = "Game Over";
 		gameOver = true;
+		pause = true;
+		Pause();
 		highScores.LoadScores ();
 		if (highScores.isHighScore (score)) {
 			highScores.SaveScores ();
