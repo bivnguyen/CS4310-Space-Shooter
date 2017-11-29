@@ -13,7 +13,7 @@ TagManager:
   - Shield
   - God
   - Enemy Weapon
-
+  - MoveBound
   layers:
   - Default
   - TransparentFX

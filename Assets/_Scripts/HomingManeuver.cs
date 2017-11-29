@@ -6,14 +6,18 @@ public class HomingManeuver : MonoBehaviour {
 
 	private Rigidbody rb;
 	private Transform target;		//Player ship
+	private GameObject playerShip;
 	public float pullSpeedFactor;
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
-		target = GameObject.FindWithTag("Player").transform;
-		if (target == null) {
-			target = GameObject.FindWithTag("God").transform;
+
+		playerShip = GameObject.FindWithTag ("Player");
+
+		if (playerShip == null) {
+			playerShip = GameObject.FindWithTag ("God");
 		}
+		target = playerShip.transform;
 	}
 
 	void FixedUpdate () {
