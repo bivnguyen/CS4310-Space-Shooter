@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
 		UpdateScore ();
 		nameInput.gameObject.SetActive (false);
 		submitButton.gameObject.SetActive (false);
-
+		//PlayerPrefs.DeleteAll ();  //Used to clear high score list
 	}
 
 	void Update()
@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour
             }
 		//}
 		if (gameOver){
-            pause = true;
+            //pause = true;
 			restartText.text = "Press 'R' for Restart";
 			restart = true;
 		}
@@ -136,8 +136,8 @@ public class GameController : MonoBehaviour
 	{
 		gameOverText.text = "Game Over";
 		gameOver = true;
-		pause = true;
-		Pause();
+		//pause = true;
+		//Pause();
 		highScores.LoadScores ();
 		if (highScores.isHighScore (score)) {
 			highScores.DisplayScoreInput ();

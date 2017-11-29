@@ -15,6 +15,7 @@ public class HighScoreController : MonoBehaviour
 	public Button submitButton;	//Name submit button
 	public Text highScoreText;	//Text box to display high scores
 
+
 	//Button controller function to be attached to submit button canvas member
 	public void submitButtonController ()
 	{
