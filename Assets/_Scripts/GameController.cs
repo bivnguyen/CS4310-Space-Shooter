@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 {
 	public GameObject [] powerUps;
 	public GameObject level;
-	public GameObject HighScores;
+	public HighScoreController highScores;
 	public Vector3 spawnValues;
 	public int hazardCount;
 	public int waveCount;
@@ -19,6 +19,9 @@ public class GameController : MonoBehaviour
 	public Text restartText;
 	public Text gameOverText;
 	public Text levelText;
+	public Text highScoreText;
+	public InputField nameInput;
+	public Button submitButton;
 
     private GameObject player;
 	private int score;
@@ -130,6 +133,11 @@ public class GameController : MonoBehaviour
 	{
 		gameOverText.text = "Game Over";
 		gameOver = true;
+		highScores.LoadScores ();
+		if (highScores.isHighScore (score)) {
+			highScores.SaveScores ();
+		}
+		highScores.PrintScores ();
 	}
 
 	public void SpawnPowerUp(Vector3 spawnPosition)
