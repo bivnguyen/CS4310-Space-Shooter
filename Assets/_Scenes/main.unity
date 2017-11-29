@@ -173,7 +173,7 @@ MonoBehaviour:
   - {fileID: 1980216659642370, guid: 82cb2c2248112864ab6079d226bac594, type: 2}
   - {fileID: 1251607908839254, guid: a6461fc99c3a4f9438a53094f0b53ada, type: 2}
   level: {fileID: 1438580585111824, guid: 6dc78b0139e7e45f4ae26969cf813c56, type: 2}
-  highScores: {fileID: 0}
+  highScores: {fileID: 1683210632}
   spawnValues: {x: 6, y: 0, z: 17.4}
   hazardCount: 10
   waveCount: 1
@@ -184,9 +184,9 @@ MonoBehaviour:
   restartText: {fileID: 1029512218}
   gameOverText: {fileID: 2118398309}
   levelText: {fileID: 1540008575}
-  highScoreText: {fileID: 0}
-  nameInput: {fileID: 0}
-  submitButton: {fileID: 0}
+  highScoreText: {fileID: 112129006}
+  nameInput: {fileID: 1302488126}
+  submitButton: {fileID: 844967349}
 --- !u!4 &95483941
 Transform:
   m_ObjectHideFlags: 0
