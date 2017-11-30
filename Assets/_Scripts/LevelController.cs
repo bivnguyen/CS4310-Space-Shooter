@@ -96,8 +96,8 @@ public class LevelController : MonoBehaviour
 		gameController.powerUps [3] = null;
 
 		int lastDigit = currentLevel % 10;
-		int astroidsToSpawn = (currentLevel * (int)Mathf.Log (currentLevel)) * (lastDigit / 2);
-
+		int astroidsToSpawn = (currentLevel*(int)Mathf.Log(currentLevel) + 20) * (lastDigit / 2);
+		Debug.Log (astroidsToSpawn);
 		yield return new WaitForSeconds(gameController.startWait);
 
 		for (int i = 0; i < astroidsToSpawn; i++) {
