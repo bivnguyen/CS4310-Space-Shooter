@@ -97,15 +97,14 @@ public class PlayerController : MonoBehaviour
 			multiShotAmmo += 20;
 			Destroy (other.gameObject);
 		} else if (other.tag == "FireRate") {
-			fireRate *= 0.75f;
+			fireRate *= 0.75f; // fire delay
 			Destroy (other.gameObject);
 			StartCoroutine ("FireRateTimer", 0);
 		} else if (other.tag == "SpeedBoost") {
-			speed *= 1.25f;
+			speed *= 1.25f; // movement speed
 			Destroy (other.gameObject);
 			StartCoroutine ("SpeedBoostTimer", 0);
-		} 
-		if (other.tag == "Shield") {
+		} else if (other.tag == "Shield") {
 			theSwitch = true;
 			Destroy (other.gameObject);
 			StartCoroutine ("ShieldTimer", 0);
@@ -127,23 +126,27 @@ public class PlayerController : MonoBehaviour
 	//after fire rate power up is obtained, this code will undo the boost after 10 seconds
 	IEnumerator FireRateTimer()
 	{
-		yield return new WaitForSeconds(10f);
+		yield return new WaitForSeconds(15f);
 		fireRate /= 0.75f;
 	}
 
 	//after speed boost power up is obtained, this code will undo the boost after 10 seconds
 	IEnumerator SpeedBoostTimer()
 	{
-		yield return new WaitForSeconds(10f);
+		yield return new WaitForSeconds(15f);
 		speed /= 1.25f;
 	}
 
+	//after multi shot power up is obtained, this code will undo the boost after 10 seconds
 	//this code will not allow multi shot power up to be stacked
 	IEnumerator MultiShotTimer()
 	{
 		yield return new WaitForSeconds(10f);
 		multiShot = false;
 	}
+
+	//after shield power up is obtained, this code will undo the boost after 10 seconds
+	//this code will not allow shield power up to be stacked
 	IEnumerator ShieldTimer()
 	{
 		yield return new WaitForSeconds (10f);
