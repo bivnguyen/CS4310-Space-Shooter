@@ -93,6 +93,7 @@ public class LevelController : MonoBehaviour
 	IEnumerator spawnBonusLevel(){
 		Debug.Log ("Spawning bonus level");
 		gameController.setBonus (false);
+		gameController.powerUps [3] = null;
 
 		int lastDigit = currentLevel % 10;
 
@@ -115,6 +116,8 @@ public class LevelController : MonoBehaviour
 		} else if (lastDigit == 3 || lastDigit == 8) {
 			gameController.SetCurrentLevel(currentLevel += 1);
 		} 
+
+		gameController.powerUps [3] = GameObject.FindWithTag("bonusPowerUp");
 
 		gameController.toggleReadyForLevel ();
 		Destroy (gameObject);

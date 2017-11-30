@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
-
+	  
 	public Text scoreText;
 	public Text restartText;
 	public Text gameOverText;
@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour
         god = false;
 		UpdateScore ();
 		nameInput.gameObject.SetActive (false);
-		submitButton.gameObject.SetActive (false);
+		submitButton.gameObject.SetActive (false); 
 		//PlayerPrefs.DeleteAll ();  //Used to clear high score list
 	}
 
@@ -129,6 +129,7 @@ public class GameController : MonoBehaviour
 	public void AddScore(){
 		score += scoreValue;
 		UpdateScore ();
+
 	}
 
 	void UpdateScore ()
