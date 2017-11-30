@@ -23,15 +23,20 @@ public class LevelController : MonoBehaviour
             maxEnemies = gameController.GetMaxEnemies();
             enemiesSpawned = 0;
             gameController.SetEnemyCounter(0);
-			if (currentLevel % 5 == 0) {
-				SpawnBoss ();
-			} 
-			else if (gameController.getBonus ()) {
+			 
+			if (gameController.getBonus ()) {
 				StartCoroutine(spawnBonusLevel());
 			}
-            else
+			else 
             {
-                StartCoroutine(SpawnWaves());
+				if (currentLevel % 5 == 0) {
+					Debug.Log (currentLevel);
+					SpawnBoss ();
+				} 
+				else {
+					Debug.Log (currentLevel);
+					StartCoroutine(SpawnWaves());
+				}
             }
         }
         if (gameController == null)
@@ -89,7 +94,7 @@ public class LevelController : MonoBehaviour
 		Debug.Log ("Spawning bonus level");
 		gameController.setBonus (false);
 
-		//int lastDigit = currentLevel % 10;
+		int lastDigit = currentLevel % 10;
 
 		yield return new WaitForSeconds(gameController.startWait);
 
@@ -103,18 +108,16 @@ public class LevelController : MonoBehaviour
 			yield return new WaitForSeconds (gameController.spawnWait);
 		}
 
-		/*if (lastDigit == 1 || lastDigit == 6) {
-			currentLevel += 4;
+		if (lastDigit == 1 || lastDigit == 6) {
+			gameController.SetCurrentLevel(currentLevel += 3);
 		} else if (lastDigit == 2 || lastDigit == 7) {
-			currentLevel += 3;
+			gameController.SetCurrentLevel(currentLevel += 2);
 		} else if (lastDigit == 3 || lastDigit == 8) {
-			currentLevel += 2;
-		} else if (lastDigit == 4 || lastDigit == 9) {
-			currentLevel += 1;
-		} */
+			gameController.SetCurrentLevel(currentLevel += 1);
+		} 
 
-		enemiesSpawned = maxEnemies;
-		enemyCounter = 0;
+		gameController.toggleReadyForLevel ();
+		Destroy (gameObject);
 		Debug.Log ("Ending Bonus level");
 	}
 }
