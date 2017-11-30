@@ -59,5 +59,5 @@ MonoBehaviour:
   - {fileID: 1136021361691464, guid: eccb97d0304f945e8bfccdf9492afd5b, type: 2}
   - {fileID: 1238874286434492, guid: 3251dc1c41193404987d886b02860f2d, type: 2}
   bosses:
-  - {fileID: 1571610209340002, guid: 0750d1e0c0c42a642b88f2984a8434ce, type: 2}
-  - {fileID: 1396187264129244, guid: 243179263a8270e48b7ea62b378f6991, type: 2}
+  - {fileID: 1099045983403820, guid: efacc1b81c2fbc14891217ace712e622, type: 2}
+  - {fileID: 1099045983403820, guid: efacc1b81c2fbc14891217ace712e622, type: 2}
