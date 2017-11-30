@@ -95,8 +95,7 @@ public class LevelController : MonoBehaviour
 		gameController.setInBonus (true);
 		gameController.setBonus (false);
 
-		int lastDigit = currentLevel % 10;
-		maxEnemies = (currentLevel*(int)Mathf.Log(currentLevel) + 20) * (lastDigit / 2);   //use maxEnemies since this is in the destruction criteria
+		maxEnemies = (currentLevel*(int)Mathf.Log(currentLevel) + 20) * (levelsTillBoss());   //use maxEnemies since this is in the destruction criteria
 		Debug.Log (maxEnemies);
 		yield return new WaitForSeconds(gameController.startWait);
 
@@ -110,18 +109,26 @@ public class LevelController : MonoBehaviour
 			yield return new WaitForSeconds (gameController.spawnWait);
 		}
 
-		if (lastDigit == 1 || lastDigit == 6) {
-			gameController.SetCurrentLevel(currentLevel += 3);
-		} else if (lastDigit == 2 || lastDigit == 7) {
-			gameController.SetCurrentLevel(currentLevel += 2);
-		} else if (lastDigit == 3 || lastDigit == 8) {
-			gameController.SetCurrentLevel(currentLevel += 1);
-		} 
+		gameController.SetCurrentLevel (currentLevel += levelsTillBoss());
 
 		//This is handled in update
 		//gameController.toggleReadyForLevel ();  
 		//Destroy (gameObject);
 		gameController.setInBonus (false);
 		Debug.Log ("Ending Bonus level");
+	}
+
+	public int levelsTillBoss () {
+		int lastDigit = currentLevel % 10;
+
+		if (lastDigit == 1 || lastDigit == 6) {
+			return 3;
+		} else if (lastDigit == 2 || lastDigit == 7) {
+			return 2;
+		} else if (lastDigit == 3 || lastDigit == 8) {
+			return 1;
+		}
+
+		return 0;
 	}
 }
