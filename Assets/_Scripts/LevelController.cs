@@ -92,8 +92,8 @@ public class LevelController : MonoBehaviour
 
 	IEnumerator spawnBonusLevel(){
 		Debug.Log ("Spawning bonus level");
+		gameController.setInBonus (true);
 		gameController.setBonus (false);
-		gameController.powerUps [3] = null;
 
 		int lastDigit = currentLevel % 10;
 		maxEnemies = (currentLevel*(int)Mathf.Log(currentLevel) + 20) * (lastDigit / 2);   //use maxEnemies since this is in the destruction criteria
@@ -118,11 +118,10 @@ public class LevelController : MonoBehaviour
 			gameController.SetCurrentLevel(currentLevel += 1);
 		} 
 
-		gameController.powerUps [3] = GameObject.FindWithTag("bonusPowerUp");
-
 		//This is handled in update
 		//gameController.toggleReadyForLevel ();  
 		//Destroy (gameObject);
-		//Debug.Log ("Ending Bonus level");
+		gameController.setInBonus (false);
+		Debug.Log ("Ending Bonus level");
 	}
 }

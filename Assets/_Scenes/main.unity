@@ -169,10 +169,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUps:
-  - {fileID: 100000, guid: baedbbad82997f445a8cb4da210404e0, type: 3}
+  - {fileID: 1101624030207598, guid: 44777f84749f9e248be01ec27580a662, type: 2}
+  - {fileID: 1980216659642370, guid: 82cb2c2248112864ab6079d226bac594, type: 2}
+  - {fileID: 1251607908839254, guid: a6461fc99c3a4f9438a53094f0b53ada, type: 2}
   - {fileID: 1563623184439796, guid: 0161475b2b02a1d4f96c87384a52d43c, type: 2}
-  - {fileID: 1563623184439796, guid: 0161475b2b02a1d4f96c87384a52d43c, type: 2}
-  - {fileID: 1563623184439796, guid: 0161475b2b02a1d4f96c87384a52d43c, type: 2}
+  bonusPowerUps:
+  - {fileID: 1101624030207598, guid: 44777f84749f9e248be01ec27580a662, type: 2}
+  - {fileID: 1980216659642370, guid: 82cb2c2248112864ab6079d226bac594, type: 2}
+  - {fileID: 1251607908839254, guid: a6461fc99c3a4f9438a53094f0b53ada, type: 2}
   level: {fileID: 1438580585111824, guid: 6dc78b0139e7e45f4ae26969cf813c56, type: 2}
   highScores: {fileID: 1683210632}
   spawnValues: {x: 6, y: 0, z: 17.4}

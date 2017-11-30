@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
 	private bool restart;
 	private bool gameOver;
 	private bool bonus;
+	private bool inBonus;
 	private bool pause;
 	private bool readyForNextLevel;
     private bool god;
@@ -116,6 +117,14 @@ public class GameController : MonoBehaviour
 		bonus = temp;
 	}
 
+	public bool getInBonus(){
+		return inBonus;
+	}
+
+	public void setInBonus(bool temp){
+		inBonus = temp;
+	}
+
 	public int GetCurrentLevel(){
 		return currentLevel;
 	}
@@ -156,9 +165,16 @@ public class GameController : MonoBehaviour
 	public void SpawnPowerUp(Vector3 spawnPosition)
 	{
 		int powerUpChance = Random.Range(1,100);
-		GameObject powerUp = powerUps[Random.Range(0,powerUps.Length)];
-		if(powerUpChance <=50){
-			Instantiate (powerUp, spawnPosition, Quaternion.identity);
+		if (inBonus) {
+			GameObject powerUp = powerUps [Random.Range (0, powerUps.Length-1)];
+			if (powerUpChance <= 50) {
+				Instantiate (powerUp, spawnPosition, Quaternion.identity);
+			}
+		} else {
+			GameObject powerUp = powerUps [Random.Range (0, powerUps.Length)];
+			if (powerUpChance <= 50) {
+				Instantiate (powerUp, spawnPosition, Quaternion.identity);
+			}
 		}
 	}
 
