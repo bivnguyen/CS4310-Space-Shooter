@@ -23,10 +23,12 @@ public class LevelController : MonoBehaviour
             maxEnemies = gameController.GetMaxEnemies();
             enemiesSpawned = 0;
             gameController.SetEnemyCounter(0);
-            if (currentLevel % 5 == 0)
-            {
-                SpawnBoss();
-            }
+			if (currentLevel % 5 == 0) {
+				SpawnBoss ();
+			} 
+			else if (gameController.getBonus ()) {
+				StartCoroutine(spawnBonusLevel());
+			}
             else
             {
                 StartCoroutine(SpawnWaves());
@@ -41,11 +43,13 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
-        if (gameController.GetEnemyCounter() <= 0 && enemiesSpawned >= maxEnemies)
-        {
-            gameController.toggleReadyForLevel();
-            Destroy(gameObject);
-        }
+		if (gameController.GetEnemyCounter () <= 0 && enemiesSpawned >= maxEnemies) {
+			gameController.toggleReadyForLevel ();
+			Destroy (gameObject);
+		} else if (gameController.getBonus ()) {
+			gameController.toggleReadyForLevel ();
+			Destroy (gameObject);
+		}
     }
 
     void SpawnBoss()
@@ -80,4 +84,37 @@ public class LevelController : MonoBehaviour
             yield return new WaitForSeconds(gameController.waveWait);
         }
     }
+
+	IEnumerator spawnBonusLevel(){
+		Debug.Log ("Spawning bonus level");
+		gameController.setBonus (false);
+
+		//int lastDigit = currentLevel % 10;
+
+		yield return new WaitForSeconds(gameController.startWait);
+
+		for (int i = 0; i < 20; i++) {
+			GameObject hazard = hazards [Random.Range (0, 3)];
+			Vector3 spawnPosition = new Vector3 (Random.Range (-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z);
+			Quaternion spawnRotation = Quaternion.identity;
+
+			Instantiate (hazard, spawnPosition, spawnRotation);
+
+			yield return new WaitForSeconds (gameController.spawnWait);
+		}
+
+		/*if (lastDigit == 1 || lastDigit == 6) {
+			currentLevel += 4;
+		} else if (lastDigit == 2 || lastDigit == 7) {
+			currentLevel += 3;
+		} else if (lastDigit == 3 || lastDigit == 8) {
+			currentLevel += 2;
+		} else if (lastDigit == 4 || lastDigit == 9) {
+			currentLevel += 1;
+		} */
+
+		enemiesSpawned = maxEnemies;
+		enemyCounter = 0;
+		Debug.Log ("Ending Bonus level");
+	}
 }

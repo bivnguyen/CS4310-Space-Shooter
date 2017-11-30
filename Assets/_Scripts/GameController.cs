@@ -41,7 +41,6 @@ public class GameController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
 		restart = false;
 		gameOver = false;
-		bonus = false;
 		restartText.text = "";
 		gameOverText.text = "";
 		highScoreText.text = "";
@@ -69,30 +68,25 @@ public class GameController : MonoBehaviour
 				Application.LoadLevel (Application.loadedLevel);
 			}
 		}
-		//if(!gameOver){
-			//if(bonus){
-			//	//spawnBonusLevel();
-			//}
-			//else{
 				
-				if(readyForNextLevel){
-					toggleReadyForLevel();
-					currentLevel+=1;
-                    SetMaxEnemies();
-                    UpdateScoreValue();
-					spawnLevel();
-				}
-			//}
-			if(Input.GetKeyDown (KeyCode.Escape)){
-				pause = !pause;
-                Pause();
-			}
-            if(Input.GetKeyDown(KeyCode.F1))
-            {
-                god = !god;
-                ToggleGodMode();
-            }
-		//}
+		if(readyForNextLevel){
+			toggleReadyForLevel();
+			currentLevel+=1;
+            SetMaxEnemies();
+            UpdateScoreValue();
+			spawnLevel();
+		}
+			
+		if(Input.GetKeyDown (KeyCode.Escape)){
+			pause = !pause;
+            Pause();
+		}
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+			god = !god;
+            ToggleGodMode();
+        }
+
 		if (gameOver){
             pause = true;
 			restartText.text = "Press 'R' for Restart";
@@ -125,7 +119,7 @@ public class GameController : MonoBehaviour
 	public int GetCurrentLevel(){
 		return currentLevel;
 	}
-
+		
 	public void AddScore (int newScoreValue)
 	{
 		score += newScoreValue;
@@ -197,6 +191,9 @@ public class GameController : MonoBehaviour
     {
         maxEnemies = currentLevel*(int)Mathf.Log(currentLevel) + 20;
     }
+	public void setMaxEnemies(int temp){
+		maxEnemies = temp;
+	}
 	public int GetMaxEnemies(){
 		return maxEnemies;
 	}

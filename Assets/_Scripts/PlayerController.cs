@@ -120,7 +120,6 @@ public class PlayerController : MonoBehaviour
 		}
 		if (other.tag == "bonusPowerUp") {
 			Debug.Log ("Picked up Bonus level");
-			multiShotAmmo += 20;
 			Destroy (other.gameObject);
 			gameController.setBonus(true);
 			Debug.Log ("Set the bonus flag to true");
