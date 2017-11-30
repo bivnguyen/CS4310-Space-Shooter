@@ -157,7 +157,7 @@ public class GameController : MonoBehaviour
 	{
 		int powerUpChance = Random.Range(1,100);
 		GameObject powerUp = powerUps[Random.Range(0,powerUps.Length)];
-		if(powerUpChance <=5){
+		if(powerUpChance <=50){
 			Instantiate (powerUp, spawnPosition, Quaternion.identity);
 		}
 	}

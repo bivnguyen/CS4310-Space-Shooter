@@ -96,17 +96,17 @@ public class LevelController : MonoBehaviour
 		gameController.powerUps [3] = null;
 
 		int lastDigit = currentLevel % 10;
-		int astroidsToSpawn = (currentLevel*(int)Mathf.Log(currentLevel) + 20) * (lastDigit / 2);
-		Debug.Log (astroidsToSpawn);
+		maxEnemies = (currentLevel*(int)Mathf.Log(currentLevel) + 20) * (lastDigit / 2);   //use maxEnemies since this is in the destruction criteria
+		Debug.Log (maxEnemies);
 		yield return new WaitForSeconds(gameController.startWait);
 
-		for (int i = 0; i < astroidsToSpawn; i++) {
+		for (int i = 0; i < maxEnemies; i++,enemiesSpawned++) {  //need to increment enemiesSpawned since it's in the destructionc criteria
 			GameObject hazard = hazards [Random.Range (0, 3)];
 			Vector3 spawnPosition = new Vector3 (Random.Range (-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z);
 			Quaternion spawnRotation = Quaternion.identity;
 
 			Instantiate (hazard, spawnPosition, spawnRotation);
-
+			gameController.IncrementEnemyCounter();				//increment enemy counter otherwise update will destroy the level as soon as you leave the for loop
 			yield return new WaitForSeconds (gameController.spawnWait);
 		}
 
@@ -120,8 +120,9 @@ public class LevelController : MonoBehaviour
 
 		gameController.powerUps [3] = GameObject.FindWithTag("bonusPowerUp");
 
-		gameController.toggleReadyForLevel ();
-		Destroy (gameObject);
-		Debug.Log ("Ending Bonus level");
+		//This is handled in update
+		//gameController.toggleReadyForLevel ();  
+		//Destroy (gameObject);
+		//Debug.Log ("Ending Bonus level");
 	}
 }
