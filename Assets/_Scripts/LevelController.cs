@@ -96,10 +96,11 @@ public class LevelController : MonoBehaviour
 		gameController.powerUps [3] = null;
 
 		int lastDigit = currentLevel % 10;
+		int astroidsToSpawn = (currentLevel * (int)Mathf.Log (currentLevel)) * (lastDigit / 2);
 
 		yield return new WaitForSeconds(gameController.startWait);
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < astroidsToSpawn; i++) {
 			GameObject hazard = hazards [Random.Range (0, 3)];
 			Vector3 spawnPosition = new Vector3 (Random.Range (-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z);
 			Quaternion spawnRotation = Quaternion.identity;
