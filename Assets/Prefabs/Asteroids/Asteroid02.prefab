@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114328859441826274}
   - component: {fileID: 114579493975204098}
   - component: {fileID: 114945625739875898}
+  - component: {fileID: 114871628339778226}
   m_Layer: 0
   m_Name: Asteroid02
   m_TagString: Enemy
@@ -157,6 +158,18 @@ MonoBehaviour:
   explosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
   playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
   scoreValue: 10
+--- !u!114 &114871628339778226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1674612771988572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bb24eac90b92647a8ad7b8ac623371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
 --- !u!114 &114945625739875898
 MonoBehaviour:
   m_ObjectHideFlags: 1

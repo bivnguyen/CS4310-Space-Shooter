@@ -114,6 +114,14 @@ public class GameController : MonoBehaviour
 		return gameOver;
 	}
 
+	public bool getBonus(){
+		return bonus;
+	}
+
+	public void setBonus(bool temp){
+		bonus = temp;
+	}
+
 	public int GetCurrentLevel(){
 		return currentLevel;
 	}

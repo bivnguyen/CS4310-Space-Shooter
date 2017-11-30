@@ -44,6 +44,15 @@ public class PlayerController : MonoBehaviour
 		multiShotAmmo = 0;
 		rb = GetComponent<Rigidbody>();
 		audioSource = GetComponent<AudioSource>();
+
+		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+
+		if (gameControllerObject != null){
+			gameController = gameControllerObject.GetComponent<GameController>();
+		}
+		if (gameController == null){
+			Debug.Log("cannot find 'GameController' script");
+		}
 	}
 
 	void Update()
@@ -110,8 +119,11 @@ public class PlayerController : MonoBehaviour
 			StartCoroutine ("ShieldTimer", 0);
 		}
 		if (other.tag == "bonusPowerUp") {
+			Debug.Log ("Picked up Bonus level");
 			multiShotAmmo += 20;
 			Destroy (other.gameObject);
+			gameController.setBonus(true);
+			Debug.Log ("Set the bonus flag to true");
 		}
 			
 	}
