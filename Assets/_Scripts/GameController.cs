@@ -219,7 +219,7 @@ public class GameController : MonoBehaviour
 		return maxEnemies;
 	}
 
-	private void UpdateScoreValue(){
+	public void UpdateScoreValue(){
 		scoreValue = currentLevel*(int)Mathf.Log(currentLevel)+10;
 	}
 
