@@ -57,6 +57,10 @@ public class GameController : MonoBehaviour
 		//PlayerPrefs.DeleteAll ();  //Used to clear high score list
 	}
 
+	public void setLevelText(string text){
+		levelText.text = text;
+	}
+
 	void Update()
 	{
 

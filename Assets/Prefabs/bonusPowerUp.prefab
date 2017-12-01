@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 136475466673546986}
   - component: {fileID: 114925829785542292}
   - component: {fileID: 114178969758049318}
+  - component: {fileID: 114219142384981578}
   m_Layer: 0
   m_Name: prop_asteroid_01
   m_TagString: bonusPowerUp
@@ -152,6 +153,18 @@ MonoBehaviour:
     xMax: 6
     zMin: -20
     zMax: 20
+--- !u!114 &114219142384981578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479566873959826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bb24eac90b92647a8ad7b8ac623371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
 --- !u!114 &114925829785542292
 MonoBehaviour:
   m_ObjectHideFlags: 1

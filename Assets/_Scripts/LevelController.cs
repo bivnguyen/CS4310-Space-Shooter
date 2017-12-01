@@ -25,6 +25,7 @@ public class LevelController : MonoBehaviour
             gameController.SetEnemyCounter(0);
 			 
 			if (gameController.getBonus ()) {
+				gameController.setLevelText("BONUS");
 				StartCoroutine(spawnBonusLevel());
 			}
 			else 
@@ -99,7 +100,7 @@ public class LevelController : MonoBehaviour
 		Debug.Log (maxEnemies);
 		yield return new WaitForSeconds(gameController.startWait);
 
-		for (int i = 0; i < maxEnemies; i++,enemiesSpawned++) {  //need to increment enemiesSpawned since it's in the destructionc criteria
+		for (enemiesSpawned = 0; enemiesSpawned < maxEnemies; enemiesSpawned++) {  //need to increment enemiesSpawned since it's in the destructionc criteria
 			GameObject hazard = hazards [Random.Range (0, 3)];
 			Vector3 spawnPosition = new Vector3 (Random.Range (-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z);
 			Quaternion spawnRotation = Quaternion.identity;
