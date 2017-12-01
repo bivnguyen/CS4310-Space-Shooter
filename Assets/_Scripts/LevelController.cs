@@ -23,7 +23,7 @@ public class LevelController : MonoBehaviour
             maxEnemies = gameController.GetMaxEnemies();
             enemiesSpawned = 0;
             gameController.SetEnemyCounter(0);
-            if (currentLevel % 1 == 0)
+            if (currentLevel % 5 == 0)
             {
                 SpawnBoss();
             }
