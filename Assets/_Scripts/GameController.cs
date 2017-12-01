@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
-
+	  
 	public Text scoreText;
 	public Text restartText;
 	public Text gameOverText;
@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
 	private bool restart;
 	private bool gameOver;
 	private bool bonus;
+	private bool inBonus;
 	private bool pause;
 	private bool readyForNextLevel;
     private bool god;
@@ -41,7 +42,6 @@ public class GameController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
 		restart = false;
 		gameOver = false;
-		bonus = false;
 		restartText.text = "";
 		gameOverText.text = "";
 		highScoreText.text = "";
@@ -53,8 +53,12 @@ public class GameController : MonoBehaviour
         god = false;
 		UpdateScore ();
 		nameInput.gameObject.SetActive (false);
-		submitButton.gameObject.SetActive (false);
+		submitButton.gameObject.SetActive (false); 
 		//PlayerPrefs.DeleteAll ();  //Used to clear high score list
+	}
+
+	public void setLevelText(string text){
+		levelText.text = text;
 	}
 
 	void Update()
@@ -69,30 +73,25 @@ public class GameController : MonoBehaviour
 				Application.LoadLevel (Application.loadedLevel);
 			}
 		}
-		//if(!gameOver){
-			//if(bonus){
-			//	//spawnBonusLevel();
-			//}
-			//else{
 				
-				if(readyForNextLevel){
-					toggleReadyForLevel();
-					currentLevel+=1;
-                    SetMaxEnemies();
-                    UpdateScoreValue();
-					spawnLevel();
-				}
-			//}
-			if(Input.GetKeyDown (KeyCode.Escape)){
-				pause = !pause;
-                Pause();
-			}
-            if(Input.GetKeyDown(KeyCode.F1))
-            {
-                god = !god;
-                ToggleGodMode();
-            }
-		//}
+		if(readyForNextLevel){
+			toggleReadyForLevel();
+			currentLevel+=1;
+            SetMaxEnemies();
+            UpdateScoreValue();
+			spawnLevel();
+		}
+			
+		if(Input.GetKeyDown (KeyCode.Escape)){
+			pause = !pause;
+            Pause();
+		}
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+			god = !god;
+            ToggleGodMode();
+        }
+
 		if (gameOver){
             pause = true;
 			restartText.text = "Press 'R' for Restart";
@@ -114,10 +113,26 @@ public class GameController : MonoBehaviour
 		return gameOver;
 	}
 
+	public bool getBonus(){
+		return bonus;
+	}
+
+	public void setBonus(bool temp){
+		bonus = temp;
+	}
+
+	public bool getInBonus(){
+		return inBonus;
+	}
+
+	public void setInBonus(bool temp){
+		inBonus = temp;
+	}
+
 	public int GetCurrentLevel(){
 		return currentLevel;
 	}
-
+		
 	public void AddScore (int newScoreValue)
 	{
 		score += newScoreValue;
@@ -127,6 +142,7 @@ public class GameController : MonoBehaviour
 	public void AddScore(){
 		score += scoreValue;
 		UpdateScore ();
+
 	}
 
 	void UpdateScore ()
@@ -153,9 +169,16 @@ public class GameController : MonoBehaviour
 	public void SpawnPowerUp(Vector3 spawnPosition)
 	{
 		int powerUpChance = Random.Range(1,100);
-		GameObject powerUp = powerUps[Random.Range(0,powerUps.Length)];
-		if(powerUpChance <=5){
-			Instantiate (powerUp, spawnPosition, Quaternion.identity);
+		if (inBonus) {
+			GameObject powerUp = powerUps [Random.Range (0, powerUps.Length-1)];
+			if (powerUpChance <= 50) {
+				Instantiate (powerUp, spawnPosition, Quaternion.identity);
+			}
+		} else {
+			GameObject powerUp = powerUps [Random.Range (0, powerUps.Length)];
+			if (powerUpChance <= 50) {
+				Instantiate (powerUp, spawnPosition, Quaternion.identity);
+			}
 		}
 	}
 
@@ -189,6 +212,9 @@ public class GameController : MonoBehaviour
     {
         maxEnemies = currentLevel*(int)Mathf.Log(currentLevel) + 20;
     }
+	public void setMaxEnemies(int temp){
+		maxEnemies = temp;
+	}
 	public int GetMaxEnemies(){
 		return maxEnemies;
 	}

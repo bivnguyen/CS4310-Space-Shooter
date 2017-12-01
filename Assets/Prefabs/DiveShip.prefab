@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23341617317975470}
   m_Layer: 0
   m_Name: vehicle_enemyShip
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114572257304664416}
   - component: {fileID: 82960988990212844}
   - component: {fileID: 114560521055822962}
+  - component: {fileID: 114742639176630922}
   m_Layer: 0
   m_Name: DiveShip
   m_TagString: Enemy
@@ -315,6 +316,18 @@ MonoBehaviour:
   explosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 2}
   playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
   scoreValue: 20
+--- !u!114 &114742639176630922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1203129034923290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bb24eac90b92647a8ad7b8ac623371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 2}
 --- !u!135 &135960630806971718
 SphereCollider:
   m_ObjectHideFlags: 1
