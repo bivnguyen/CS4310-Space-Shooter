@@ -234,11 +234,13 @@ public class GameController : MonoBehaviour
     {
         if (pause)
         {
-            PauseMenu.enabled = true;
+            if (gameOver == false)
+                PauseMenu.enabled = true;
             Time.timeScale = 0;
         }
         else
         {
+            
             PauseMenu.enabled = false;
             Time.timeScale = 1;
         }
