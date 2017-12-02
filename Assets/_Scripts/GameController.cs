@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
 	public Text highScoreText;
 	public InputField nameInput;
 	public Button submitButton;
+    public Canvas PauseMenu;
 
     private GameObject player;
 	private int score;
@@ -53,8 +54,10 @@ public class GameController : MonoBehaviour
         god = false;
 		UpdateScore ();
 		nameInput.gameObject.SetActive (false);
-		submitButton.gameObject.SetActive (false); 
-		//PlayerPrefs.DeleteAll ();  //Used to clear high score list
+		submitButton.gameObject.SetActive (false);
+        //PlayerPrefs.DeleteAll ();  //Used to clear high score list
+        PauseMenu.GetComponent<Canvas>();
+        PauseMenu.enabled = false;
 	}
 
 	public void setLevelText(string text){
@@ -231,10 +234,12 @@ public class GameController : MonoBehaviour
     {
         if (pause)
         {
+            PauseMenu.enabled = true;
             Time.timeScale = 0;
         }
         else
         {
+            PauseMenu.enabled = false;
             Time.timeScale = 1;
         }
     }
