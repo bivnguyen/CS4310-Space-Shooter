@@ -44,6 +44,7 @@ public class DestroyByContact : MonoBehaviour
 		if(tag == "Enemy"){
 			gameController.SpawnPowerUp(transform.position);
             gameController.DecrementEnemyCounter();
+            Debug.Log("Destroy by contact: Enemy Counter = " + gameController.GetEnemyCounter());
 			gameController.AddScore();
         }
        

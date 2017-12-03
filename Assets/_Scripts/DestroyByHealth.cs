@@ -40,6 +40,7 @@ public class DestroyByHealth : MonoBehaviour {
 			}
 			gameController.AddScore(scoreValue);
             gameController.DecrementEnemyCounter();
+            gameController.ToggleInBoss();
 			Destroy(gameObject);
 		}
 	}

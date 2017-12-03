@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
 	private bool pause;
 	private bool readyForNextLevel;
     private bool god;
+    private bool inBoss;
     
 	void Start()
 	{
@@ -50,6 +51,8 @@ public class GameController : MonoBehaviour
 		readyForNextLevel = true;
 		score = 0;
 		bonus = false;
+        inBonus = false;
+        inBoss = false;
 		pause = false;
         god = false;
 		UpdateScore ();
@@ -102,7 +105,15 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+    public void ToggleInBoss()
+    {
+        inBoss = !inBoss;
+    }
 
+    public bool GetInBoss()
+    {
+        return inBoss;
+    }
 	public void toggleReadyForLevel(){
 		if(readyForNextLevel){
 		readyForNextLevel = false;
@@ -172,7 +183,7 @@ public class GameController : MonoBehaviour
 	public void SpawnPowerUp(Vector3 spawnPosition)
 	{
 		int powerUpChance = Random.Range(1,100);
-		if (inBonus) {
+		if (inBonus || inBoss) {
 			GameObject powerUp = powerUps [Random.Range (0, powerUps.Length-1)];
 			if (powerUpChance <= 50) {
 				Instantiate (powerUp, spawnPosition, Quaternion.identity);

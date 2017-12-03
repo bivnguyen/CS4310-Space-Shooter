@@ -23,8 +23,13 @@ public class destoryByBonus : MonoBehaviour {
 			if(explosion != null){
 				Instantiate(explosion, transform.position, transform.rotation);
 			}
-			Debug.Log ("Destroyed Enemy by Bonus");
-			Destroy(gameObject);
+			
+            if(tag == "Enemy")
+            {
+                gameController.DecrementEnemyCounter();
+            }
+            Debug.Log("Destroyed Enemy by Bonus Enemy counter = " + gameController.GetEnemyCounter());
+            Destroy(gameObject);
 		}
 	}
 }

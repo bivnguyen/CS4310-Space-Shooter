@@ -17,21 +17,23 @@ public class LevelController : MonoBehaviour
     {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         if (gameControllerObject != null)
-        {
+        {   
             gameController = gameControllerObject.GetComponent<GameController>();
             currentLevel = gameController.GetCurrentLevel();
             maxEnemies = gameController.GetMaxEnemies();
             enemiesSpawned = 0;
             gameController.SetEnemyCounter(0);
-			 
+            Debug.Log("Starting level. EnemyCounter = " + gameController.GetEnemyCounter() + " enemies spawned = " + enemiesSpawned + " maxEnemies = " + maxEnemies); 
 			if (gameController.getBonus ()) {
 				gameController.setLevelText("BONUS");
 				StartCoroutine(spawnBonusLevel());
 			}
 			else 
             {
-				if (currentLevel % 5 == 0) {
+                gameController.setInBonus(false);
+                if (currentLevel % 5 == 0) {
 					Debug.Log (currentLevel);
+                    gameController.ToggleInBoss();
 					SpawnBoss ();
 				} 
 				else {
@@ -49,12 +51,21 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
-		if (gameController.GetEnemyCounter () <= 0 && enemiesSpawned >= maxEnemies) {
+        if (gameController.getBonus())
+        {
+            enemiesSpawned = maxEnemies;
+        }
+        if (gameController.GetInBoss())
+        {
+            gameController.SetEnemyCounter(1);
+        }
+		if (gameController.GetEnemyCounter () <= 0 && enemiesSpawned >= maxEnemies && !gameController.GetInBoss()) {
+            Debug.Log("Destroying level controller. EnemyCounter = " + gameController.GetEnemyCounter() + " enemies spawned = " + enemiesSpawned + " maxEnemies = " + maxEnemies);
 			gameController.toggleReadyForLevel ();
 			Destroy (gameObject);
-		} else if (gameController.getBonus ()) {
-			gameController.toggleReadyForLevel ();
-			Destroy (gameObject);
+		//} else if (gameController.getBonus ()) {
+		//	gameController.toggleReadyForLevel ();
+		//	Destroy (gameObject);
 		}
     }
 
@@ -71,7 +82,7 @@ public class LevelController : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
-        for (enemiesSpawned = 0; enemiesSpawned < maxEnemies;)
+        for (enemiesSpawned = 0; enemiesSpawned <= maxEnemies;)
         {
             yield return new WaitForSeconds(gameController.startWait);
             for (int i = 0; i < gameController.hazardCount; i++, enemiesSpawned++)
@@ -85,6 +96,7 @@ public class LevelController : MonoBehaviour
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(hazard, spawnPosition, spawnRotation);
                 gameController.IncrementEnemyCounter();
+                Debug.Log("Enemy spawned: Enemy Counter = " + gameController.GetEnemyCounter());
                 yield return new WaitForSeconds(gameController.spawnWait);
             }
             yield return new WaitForSeconds(gameController.waveWait);
@@ -103,14 +115,15 @@ public class LevelController : MonoBehaviour
 		Debug.Log (maxEnemies);
 		yield return new WaitForSeconds(gameController.startWait);
 
-		for (enemiesSpawned = 0; enemiesSpawned < maxEnemies; enemiesSpawned++) {  //need to increment enemiesSpawned since it's in the destructionc criteria
+		for (enemiesSpawned = 0; enemiesSpawned <= maxEnemies; enemiesSpawned++) {  //need to increment enemiesSpawned since it's in the destructionc criteria
 			GameObject hazard = hazards [Random.Range (0, 3)];
 			Vector3 spawnPosition = new Vector3 (Random.Range (-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z);
 			Quaternion spawnRotation = Quaternion.identity;
 
 			Instantiate (hazard, spawnPosition, spawnRotation);
 			gameController.IncrementEnemyCounter();				//increment enemy counter otherwise update will destroy the level as soon as you leave the for loop
-			yield return new WaitForSeconds (gameController.spawnWait);
+            Debug.Log("Enemy spawned: Enemy Counter = " + gameController.GetEnemyCounter());
+            yield return new WaitForSeconds (gameController.spawnWait);
 		}
 
 
@@ -118,7 +131,6 @@ public class LevelController : MonoBehaviour
 		//This is handled in update
 		//gameController.toggleReadyForLevel ();  
 		//Destroy (gameObject);
-		gameController.setInBonus (false);
 		Debug.Log ("Ending Bonus level");
 	}
 

@@ -107,6 +107,10 @@ public class PlayerController : MonoBehaviour
 			Destroy (other.gameObject);
 		} else if (other.tag == "FireRate") {
 			fireRate *= 0.75f;
+            if(fireRate < 0.15f)
+            {
+                fireRate = 0.20f;
+            }
 			Destroy (other.gameObject);
 			StartCoroutine ("FireRateTimer", 0);
 		} else if (other.tag == "SpeedBoost") {
@@ -142,7 +146,7 @@ public class PlayerController : MonoBehaviour
 	IEnumerator FireRateTimer()
 	{
 		yield return new WaitForSeconds(10f);
-		fireRate /= 0.75f;
+		fireRate = 0.35f;
 	}
 
 	//after speed boost power up is obtained, this code will undo the boost after 10 seconds
