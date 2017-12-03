@@ -12,6 +12,8 @@ public class LevelController : MonoBehaviour
     private int enemyCounter;
     public GameObject[] hazards;
     public GameObject[] bosses;
+	private int progressBarMax;
+	private int progressBarCurrent;
 
     void Start()
     {
@@ -115,7 +117,8 @@ public class LevelController : MonoBehaviour
 		Debug.Log (maxEnemies);
 		yield return new WaitForSeconds(gameController.startWait);
 
-		for (enemiesSpawned = 0; enemiesSpawned <= maxEnemies; enemiesSpawned++) {  //need to increment enemiesSpawned since it's in the destructionc criteria
+		for (enemiesSpawned = 0; enemiesSpawned <= maxEnemies; enemiesSpawned++) 
+		{  //need to increment enemiesSpawned since it's in the destructionc criteria
 			GameObject hazard = hazards [Random.Range (0, 3)];
 			Vector3 spawnPosition = new Vector3 (Random.Range (-gameController.spawnValues.x, gameController.spawnValues.x), gameController.spawnValues.y, gameController.spawnValues.z);
 			Quaternion spawnRotation = Quaternion.identity;
@@ -127,7 +130,6 @@ public class LevelController : MonoBehaviour
 		}
 
 
-
 		//This is handled in update
 		//gameController.toggleReadyForLevel ();  
 		//Destroy (gameObject);
@@ -137,14 +139,45 @@ public class LevelController : MonoBehaviour
 	public int levelsTillBoss () {
 		int lastDigit = currentLevel % 5;
 
-		if (lastDigit == 1) {
+		if (lastDigit == 1) 
+		{
 			return 3;
-		} else if (lastDigit == 2) {
+		} 
+		else if (lastDigit == 2) 
+		{
 			return 2;
-		} else if (lastDigit == 3) {
+		} 
+		else if (lastDigit == 3)
+		{
 			return 1;
 		}
 
 		return 0;
 	}
+
+	int getProgressBarMax()
+	{
+		return progressBarMax;
+	}
+
+	void setProgressBarMax(int max)
+	{
+		progressBarMax = max;
+	}
+
+	int getProgressBarCurrent()
+	{
+		return progressBarCurrent;
+	}
+
+	void setProgressBarCurrent(int addToProgressBar)
+	{
+		progressBarCurrent += addToProgressBar;
+	}
+
+	void resetProgressBarCurrent()
+	{
+		progressBarCurrent = 0;
+	}
+		
 }
