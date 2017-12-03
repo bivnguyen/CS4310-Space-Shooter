@@ -111,7 +111,7 @@ public class LevelController : MonoBehaviour
 		gameController.SetCurrentLevel (currentLevel + levelsTilBoss);
 		gameController.UpdateScoreValue();
 
-		maxEnemies = (currentLevel*(int)Mathf.Log(currentLevel) + 20) * (levelsTilBoss);   //use maxEnemies since this is in the destruction criteria
+		maxEnemies = (currentLevel*(int)Mathf.Log(currentLevel) + gameController.GetBaseEnemies()) * (levelsTilBoss);   //use maxEnemies since this is in the destruction criteria
 		Debug.Log (maxEnemies);
 		yield return new WaitForSeconds(gameController.startWait);
 

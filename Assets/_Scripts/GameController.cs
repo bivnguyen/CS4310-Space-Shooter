@@ -30,6 +30,9 @@ public class GameController : MonoBehaviour
 	private int enemyCounter;
 	private int maxEnemies;
 	private int scoreValue;
+    private int baseEnemies;
+    private int baseScore;
+    private int difficulty;
 	private bool restart;
 	private bool gameOver;
 	private bool bonus;
@@ -41,6 +44,25 @@ public class GameController : MonoBehaviour
     
 	void Start()
 	{
+        if (PlayerPrefs.HasKey("Difficulty"))
+        {
+            difficulty = PlayerPrefs.GetInt("Difficulty");
+        }else{
+            difficulty = 1;
+        }
+        switch (difficulty)
+        {
+            case 0:
+                SetEasy();
+                break;
+            case 2:
+                SetHard();
+                break;
+            case 1:
+            default:
+                SetNormal();
+                break;
+        }
         player = GameObject.FindWithTag("Player");
 		restart = false;
 		gameOver = false;
@@ -105,6 +127,32 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+    public void SetEasy()
+    {
+        spawnWait = 0.75f;
+        startWait = 2f;
+        waveWait = 4;
+        baseEnemies = 15;
+        baseScore = 5;
+    }
+
+    public void SetNormal()
+    {
+        spawnWait = 0.5f;
+        startWait = 2f;
+        waveWait = 3;
+        baseEnemies = 20;
+        baseScore = 10;
+    }
+
+    public void SetHard()
+    {
+        spawnWait = 0.25f;
+        startWait = 2f;
+        waveWait = 1.5f;
+        baseEnemies = 30;
+        baseScore = 20;
+    }
     public void ToggleInBoss()
     {
         inBoss = !inBoss;
@@ -185,17 +233,21 @@ public class GameController : MonoBehaviour
 		int powerUpChance = Random.Range(1,100);
 		if (inBonus || inBoss) {
 			GameObject powerUp = powerUps [Random.Range (0, powerUps.Length-1)];
-			if (powerUpChance <= 50) {
+			if (powerUpChance <= 25) {
 				Instantiate (powerUp, spawnPosition, Quaternion.identity);
 			}
 		} else {
 			GameObject powerUp = powerUps [Random.Range (0, powerUps.Length)];
-			if (powerUpChance <= 50) {
+			if (powerUpChance <= 15) {
 				Instantiate (powerUp, spawnPosition, Quaternion.identity);
 			}
 		}
 	}
 
+    public int GetBaseEnemies()
+    {
+        return baseEnemies;
+    }
 	void spawnLevel (){
         levelText.text = "Level " + currentLevel;
         Instantiate(level, transform.position, Quaternion.identity);
@@ -224,7 +276,7 @@ public class GameController : MonoBehaviour
 
     public void SetMaxEnemies()
     {
-        maxEnemies = currentLevel*(int)Mathf.Log(currentLevel) + 20;
+        maxEnemies = currentLevel*(int)Mathf.Log(currentLevel) + baseEnemies;
     }
 	public void setMaxEnemies(int temp){
 		maxEnemies = temp;
@@ -234,7 +286,7 @@ public class GameController : MonoBehaviour
 	}
 
 	public void UpdateScoreValue(){
-		scoreValue = currentLevel*(int)Mathf.Log(currentLevel)+10;
+		scoreValue = currentLevel*(int)Mathf.Log(currentLevel)+baseScore;
 	}
 
 	public int GetScoreValue(){

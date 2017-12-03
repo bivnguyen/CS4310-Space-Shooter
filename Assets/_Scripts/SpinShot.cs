@@ -11,9 +11,7 @@ public class SpinShot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		bossObject = GameObject.FindWithTag("Boss");
-		bossTransform = bossObject.GetComponent<Transform>();
-
-	
+		bossTransform = bossObject.GetComponent<Transform>();	
 	}
 
 	void FixedUpdate(){

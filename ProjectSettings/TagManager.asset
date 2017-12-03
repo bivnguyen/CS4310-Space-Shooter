@@ -15,6 +15,7 @@ TagManager:
   - Enemy Weapon
   - bonusPowerUp
   - MoveBound
+  - ShieldPowerUp
   layers:
   - Default
   - TransparentFX

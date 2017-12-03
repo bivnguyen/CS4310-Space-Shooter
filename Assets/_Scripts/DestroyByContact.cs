@@ -26,7 +26,7 @@ public class DestroyByContact : MonoBehaviour
 
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Enemy Weapon" || other.tag == "Boss" || 
-			other.tag == "MultiShot" || other.tag == "FireRate" || other.tag == "SpeedBoost" || other.tag == "Shield" || 
+			other.tag == "MultiShot" || other.tag == "FireRate" || other.tag == "SpeedBoost" || other.tag == "ShieldPowerUp" || 
 			other.tag == "bonusPowerUp" || other.tag == "MoveBound")
 
 
@@ -50,7 +50,7 @@ public class DestroyByContact : MonoBehaviour
        
 		
 		//if(other.tag != "Player")     //god mode for testing
-		if (!isShieldOn && other.tag != "God")
+		if (other.tag!= "Shield" && other.tag != "God")
 		{
 			Destroy (other.gameObject);
 		}
