@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class LevelController : MonoBehaviour
     private int enemyCounter;
     public GameObject[] hazards;
     public GameObject[] bosses;
+
 	private int progressBarMax;
 	private int progressBarCurrent;
+
 
     void Start()
     {
@@ -109,12 +112,18 @@ public class LevelController : MonoBehaviour
 		Debug.Log ("Spawning bonus level");
 		gameController.setInBonus (true);
 		gameController.setBonus (false);
+		gameController.progressBar.gameObject.SetActive (true);
 		int levelsTilBoss = levelsTillBoss();
+
 		gameController.SetCurrentLevel (currentLevel + levelsTilBoss);
 		gameController.UpdateScoreValue();
 
 		maxEnemies = (currentLevel*(int)Mathf.Log(currentLevel) + gameController.GetBaseEnemies()) * (levelsTilBoss);   //use maxEnemies since this is in the destruction criteria
 		Debug.Log (maxEnemies);
+
+		gameController.progressBar.maxValue = maxEnemies;
+		//progressBar.maxValue = maxEnemies;
+
 		yield return new WaitForSeconds(gameController.startWait);
 
 		for (enemiesSpawned = 0; enemiesSpawned <= maxEnemies; enemiesSpawned++) 
@@ -124,12 +133,16 @@ public class LevelController : MonoBehaviour
 			Quaternion spawnRotation = Quaternion.identity;
 
 			Instantiate (hazard, spawnPosition, spawnRotation);
+			gameController.progressBar.value++; 
 			gameController.IncrementEnemyCounter();				//increment enemy counter otherwise update will destroy the level as soon as you leave the for loop
             Debug.Log("Enemy spawned: Enemy Counter = " + gameController.GetEnemyCounter());
             yield return new WaitForSeconds (gameController.spawnWait);
 		}
 
-
+		if (enemyCounter == 0) 
+		{
+			resetProgressBar ();
+		}
 		//This is handled in update
 		//gameController.toggleReadyForLevel ();  
 		//Destroy (gameObject);
@@ -175,9 +188,9 @@ public class LevelController : MonoBehaviour
 		progressBarCurrent += addToProgressBar;
 	}
 
-	void resetProgressBarCurrent()
+	void resetProgressBar()
 	{
-		progressBarCurrent = 0;
-	}
-		
+		gameController.progressBar.value = 0;
+		gameController.progressBar.gameObject.SetActive (false);
+	}		
 }

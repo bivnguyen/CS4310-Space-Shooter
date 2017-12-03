@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
 	private bool readyForNextLevel;
     private bool god;
     private bool inBoss;
+
+	public Slider progressBar;
     
 	void Start()
 	{
