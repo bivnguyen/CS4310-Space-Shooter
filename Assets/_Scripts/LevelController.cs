@@ -20,11 +20,13 @@ public class LevelController : MonoBehaviour
 
     void Start()
     {
+        
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         if (gameControllerObject != null)
         {   
             gameController = gameControllerObject.GetComponent<GameController>();
             currentLevel = gameController.GetCurrentLevel();
+            Debug.Log("New level spawned. Level#" + currentLevel);
             maxEnemies = gameController.GetMaxEnemies();
             enemiesSpawned = 0;
             gameController.SetEnemyCounter(0);
@@ -66,6 +68,7 @@ public class LevelController : MonoBehaviour
         }
 		if (gameController.GetEnemyCounter () <= 0 && enemiesSpawned >= maxEnemies && !gameController.GetInBoss()) {
             Debug.Log("Destroying level controller. EnemyCounter = " + gameController.GetEnemyCounter() + " enemies spawned = " + enemiesSpawned + " maxEnemies = " + maxEnemies);
+            gameController.SetEnemyCounter(0);
 			gameController.toggleReadyForLevel ();
 			Destroy (gameObject);
 		//} else if (gameController.getBonus ()) {
@@ -109,13 +112,13 @@ public class LevelController : MonoBehaviour
     }
 
 	IEnumerator spawnBonusLevel(){
-		Debug.Log ("Spawning bonus level");
+		Debug.Log ("Spawning bonus level. currentLevel = " + currentLevel);
 		gameController.setInBonus (true);
 		gameController.setBonus (false);
 		gameController.progressBar.gameObject.SetActive (true);
 		int levelsTilBoss = levelsTillBoss();
 
-		gameController.SetCurrentLevel (currentLevel + levelsTilBoss);
+		gameController.SetCurrentLevel (currentLevel + levelsTilBoss - 1);
 		gameController.UpdateScoreValue();
 
 		maxEnemies = (currentLevel*(int)Mathf.Log(currentLevel) + gameController.GetBaseEnemies()) * (levelsTilBoss);   //use maxEnemies since this is in the destruction criteria
@@ -154,16 +157,20 @@ public class LevelController : MonoBehaviour
 
 		if (lastDigit == 1) 
 		{
-			return 3;
+			return 4;
 		} 
 		else if (lastDigit == 2) 
 		{
-			return 2;
+			return 3;
 		} 
 		else if (lastDigit == 3)
 		{
-			return 1;
+			return 2;
 		}
+        else if (lastDigit == 4)
+        {
+            return 1;
+        }
 
 		return 0;
 	}
