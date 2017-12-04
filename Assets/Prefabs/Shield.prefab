@@ -19,15 +19,15 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4501488627218912}
-  - component: {fileID: 33633768182162060}
   - component: {fileID: 23459999530438286}
   - component: {fileID: 54622266516452600}
-  - component: {fileID: 136938197390341734}
-  - component: {fileID: 114640371373137296}
   - component: {fileID: 114924195187765448}
+  - component: {fileID: 114640371373137296}
+  - component: {fileID: 33281080699390146}
+  - component: {fileID: 135987434935909332}
   m_Layer: 0
   m_Name: Shield
-  m_TagString: Shield
+  m_TagString: ShieldPowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937800297795654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.24, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_LocalPosition: {x: 0.006766157, y: 0.3971653, z: 2.0683968}
+  m_LocalScale: {x: 300, y: 300, z: 300}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,13 +79,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33633768182162060
+--- !u!33 &33281080699390146
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937800297795654}
-  m_Mesh: {fileID: 4300000, guid: 8552efffc66648c41b609e53786899aa, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 01736255bbf024b46b85da4dff139488, type: 3}
 --- !u!54 &54622266516452600
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0001f257bcd740ca936eeb7c80991db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -1
---- !u!136 &136938197390341734
-CapsuleCollider:
+  speed: -3
+--- !u!135 &135987434935909332
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -144,7 +144,6 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.017
-  m_Height: 0.020326838
-  m_Direction: 2
-  m_Center: {x: 0, y: 4.656613e-10, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.0009999999
+  m_Center: {x: 0.00033889888, y: 0.00019388962, z: -0.00024029786}

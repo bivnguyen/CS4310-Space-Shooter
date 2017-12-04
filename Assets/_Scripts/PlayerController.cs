@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 	public float speed;
 	public Boundary boundary;
 	public GameObject shot;
+    public GameObject shield;
 	public float fireRate = 0.5f;
 	private float nextFire = 0.0f;
 	private AudioSource audioSource;
@@ -24,11 +25,16 @@ public class PlayerController : MonoBehaviour
 	private bool multiShot;
 	public Transform shotSpawn1; 
 	public Transform shotSpawn2; 
-	public Transform shotSpawn3; 
-	private int multiShotAmmo;
+	public Transform shotSpawn3;
+    public Transform shieldSpawn1;
+    public Transform shieldSpawn2;
+    public Transform shieldSpawn3;
+    public Transform shieldSpawn4;
+    private int multiShotAmmo;
+    private bool fireRateTime;
 
 
-	private DestroyByContact shield = new DestroyByContact();
+	//private DestroyByContact shield = new DestroyByContact();
 	private bool theSwitch;
 
 	//gunSwitch doesn't seem to work when I use it from PickupOnContact.cs
@@ -41,20 +47,30 @@ public class PlayerController : MonoBehaviour
 	{
 		theSwitch = false;
 		multiShot = false;
+        fireRateTime = false;
 		multiShotAmmo = 0;
 		rb = GetComponent<Rigidbody>();
 		audioSource = GetComponent<AudioSource>();
+
+		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+
+		if (gameControllerObject != null){
+			gameController = gameControllerObject.GetComponent<GameController>();
+		}
+		if (gameController == null){
+			Debug.Log("cannot find 'GameController' script");
+		}
 	}
 
 	void Update()
 	{
-		if (theSwitch) {
-			shield.shieldSwitch (true);
-		} 
-		else
-		{
-			shield.shieldSwitch (false);
-		}
+		//if (theSwitch) {
+		//	shield.shieldSwitch (true);
+		//} 
+		//else
+		//{
+		//	shield.shieldSwitch (false);
+		//}
 
 
 		if(Input.GetButton ("Fire1") && Time.time > nextFire){
@@ -98,17 +114,39 @@ public class PlayerController : MonoBehaviour
 			Destroy (other.gameObject);
 		} else if (other.tag == "FireRate") {
 			fireRate *= 0.75f;
+            if(fireRate < 0.20f)
+            {
+                fireRate = 0.20f;
+            }
 			Destroy (other.gameObject);
-			StartCoroutine ("FireRateTimer", 0);
+            if (!fireRateTime)
+            {
+                fireRateTime = true;
+                StartCoroutine("FireRateTimer", 0);
+            }
 		} else if (other.tag == "SpeedBoost") {
 			speed *= 1.25f;
 			Destroy (other.gameObject);
 			StartCoroutine ("SpeedBoostTimer", 0);
-		} 
-		if (other.tag == "Shield") {
-			theSwitch = true;
+		} else if (other.tag == "ShieldPowerUp") {
+			
 			Destroy (other.gameObject);
-			StartCoroutine ("ShieldTimer", 0);
+            if (!theSwitch)
+            {
+                Instantiate(shield, shieldSpawn1.position, shieldSpawn1.rotation);
+                Instantiate(shield, shieldSpawn2.position, shieldSpawn2.rotation);
+                Instantiate(shield, shieldSpawn3.position, shieldSpawn3.rotation);
+                Instantiate(shield, shieldSpawn4.position, shieldSpawn4.rotation);
+
+                theSwitch = true;
+                StartCoroutine("ShieldTimer", 0);
+            }
+		}
+		if (other.tag == "bonusPowerUp") {
+			Debug.Log ("Picked up Bonus level");
+			Destroy (other.gameObject);
+			gameController.setBonus(true);
+			Debug.Log ("Set the bonus flag to true");
 		}
 			
 	}
@@ -128,7 +166,8 @@ public class PlayerController : MonoBehaviour
 	IEnumerator FireRateTimer()
 	{
 		yield return new WaitForSeconds(10f);
-		fireRate /= 0.75f;
+		fireRate = 0.35f;
+        fireRateTime = false;
 	}
 
 	//after speed boost power up is obtained, this code will undo the boost after 10 seconds

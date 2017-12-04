@@ -5,13 +5,21 @@ using UnityEngine;
 public class FollowManuver : MonoBehaviour {
 
 	private Rigidbody rb;
-	public Transform target;		//Player ship
+	private Transform target;		//Player ship
 	public float chaseSpeed;		//Movement speed
 	private GameObject playerShip;
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
-		target = GameObject.FindWithTag("Player").transform;
+		playerShip = GameObject.FindWithTag ("Player");
+
+		if (playerShip == null) {
+			playerShip = GameObject.FindWithTag ("God");
+		}
+
+		target = playerShip.transform;
+
+
 	}
 
 	void FixedUpdate () {

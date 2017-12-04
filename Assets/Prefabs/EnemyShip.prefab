@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 23798336015518842}
   m_Layer: 0
   m_Name: vehicle_enemyShip
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 114638284081387638}
   - component: {fileID: 114684951497753580}
   - component: {fileID: 82016051332298726}
+  - component: {fileID: 114068840443344316}
   m_Layer: 0
   m_Name: EnemyShip
   m_TagString: Enemy
@@ -274,6 +275,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114068840443344316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864036545250344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bb24eac90b92647a8ad7b8ac623371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 100012, guid: 384371afbb4354cc9a3fc68eab303756, type: 2}
 --- !u!114 &114638284081387638
 MonoBehaviour:
   m_ObjectHideFlags: 1

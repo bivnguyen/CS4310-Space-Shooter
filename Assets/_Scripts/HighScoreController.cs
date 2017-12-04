@@ -72,7 +72,7 @@ public class HighScoreController : MonoBehaviour
 	//Display high scores into text box GUI element
 	public void PrintScores ()
 	{
-		string scoreList = "";
+		string scoreList = "High Scores\n\n";
 
 		for (int i = 0; i < highScores.Count; i++) {
 			scoreList += i+1 + ".\t" + highScores[i].name + "\t\t" + highScores[i].score +  "\n";

@@ -28,7 +28,7 @@ public class BossController : MonoBehaviour {
     }
 
 	void OnTriggerEnter(Collider other){
-		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Enemy Weapon")
+		if(other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "Enemy Weapon" || other.tag == "MoveBound" || other.tag == "Shield")
 		{
 			return;
 		}

@@ -13,7 +13,9 @@ TagManager:
   - Shield
   - God
   - Enemy Weapon
-
+  - bonusPowerUp
+  - MoveBound
+  - ShieldPowerUp
   layers:
   - Default
   - TransparentFX

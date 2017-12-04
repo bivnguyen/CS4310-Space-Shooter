@@ -23,6 +23,7 @@ public class DestroyByBoundary : MonoBehaviour {
         if (other.tag == "Enemy")
         {
             gameController.DecrementEnemyCounter();
+            Debug.Log("Destroy by boundary: Enemy Counter = " + gameController.GetEnemyCounter());
         }
         Destroy(other.gameObject);
     }
