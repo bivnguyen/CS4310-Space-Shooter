@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 	private int enemyCounter;
 	private int maxEnemies;
 	private int scoreValue;
-    private int baseEnemies;
+    private int baseEnemies = 20;
     private int baseScore;
     private int difficulty;
 	private bool restart;
@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
 	private bool readyForNextLevel;
     private bool god;
     private bool inBoss;
+
+	public Slider progressBar;
     
 	void Start()
 	{
@@ -83,7 +85,8 @@ public class GameController : MonoBehaviour
         //PlayerPrefs.DeleteAll ();  //Used to clear high score list
         PauseMenu.GetComponent<Canvas>();
         PauseMenu.enabled = false;
-	}
+        progressBar.gameObject.SetActive(false);
+    }
 
 	public void setLevelText(string text){
 		levelText.text = text;
@@ -104,7 +107,8 @@ public class GameController : MonoBehaviour
 				
 		if(readyForNextLevel){
 			toggleReadyForLevel();
-			currentLevel+=1;
+            if(!bonus)
+			    currentLevel+=1;
             SetMaxEnemies();
             UpdateScoreValue();
 			spawnLevel();
@@ -129,7 +133,7 @@ public class GameController : MonoBehaviour
 
     public void SetEasy()
     {
-        spawnWait = 0.75f;
+        spawnWait = 1.0f;
         startWait = 2f;
         waveWait = 4;
         baseEnemies = 15;
@@ -147,7 +151,7 @@ public class GameController : MonoBehaviour
 
     public void SetHard()
     {
-        spawnWait = 0.25f;
+        spawnWait = 0.20f;
         startWait = 2f;
         waveWait = 1.5f;
         baseEnemies = 30;

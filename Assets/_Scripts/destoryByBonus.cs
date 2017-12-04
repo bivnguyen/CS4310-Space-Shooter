@@ -9,18 +9,22 @@ public class destoryByBonus : MonoBehaviour {
 	void Start () {
 		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
 
-		if (gameControllerObject != null){
+		if (gameControllerObject != null)
+		{
 			gameController = gameControllerObject.GetComponent<GameController>();
 		}
-		if (gameController == null){
+		if (gameController == null)
+		{
 			Debug.Log("cannot find 'GameController' script");
 		}
 	}
 	
 
 	void Update () {
-		if (gameController.getBonus()){
-			if(explosion != null){
+		if (gameController.getBonus())
+		{
+			if(explosion != null)
+			{
 				Instantiate(explosion, transform.position, transform.rotation);
 			}
 			
